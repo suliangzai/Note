@@ -2,10 +2,14 @@ name: CI
 on:
   push:
     branches:
-      - master
       - main
+  pull_request:
+    branches:
+      - main
+
 permissions:
   contents: write
+  
 jobs:
   deploy:
     runs-on: ubuntu-latest
