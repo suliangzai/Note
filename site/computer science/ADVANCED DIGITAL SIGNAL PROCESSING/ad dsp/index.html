@@ -1,0 +1,1765 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Suliangzai">
+      
+      
+      
+        <link rel="prev" href="../../ARTIFICIAL%20INTELLIGENCE%20%26%20DATA%20MINING/AI%20%26%20data%20mining/">
+      
+      
+        <link rel="next" href="../../GENETIC%20ALGORITHMS%20%26%20MACHINE%20LEARNING/genetic%20algorithms/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.1">
+    
+    
+      
+        <title>Advanced Digital Signal Processing - Suliangzai's Wiki</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#part-1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Suliangzai&#39;s Wiki" class="md-header__button md-logo" aria-label="Suliangzai's Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Suliangzai's Wiki
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Advanced Digital Signal Processing
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="lime"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../home/" class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../about/overview/" class="md-tabs__link">
+          
+  
+  About
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../features/" class="md-tabs__link">
+          
+  
+  Features
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../ARTIFICIAL%20INTELLIGENCE%20%26%20DATA%20MINING/AI%20%26%20data%20mining/" class="md-tabs__link">
+          
+  
+  计算机相关课程
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../contact/" class="md-tabs__link">
+        
+  
+    
+  
+  Contacts
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Suliangzai&#39;s Wiki" class="md-nav__button md-logo" aria-label="Suliangzai's Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Suliangzai's Wiki
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../home/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    About
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            About
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/team/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Team
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Features
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Features
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    mkdocs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/markdown/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    markdown
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    计算机相关课程
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            计算机相关课程
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ARTIFICIAL%20INTELLIGENCE%20%26%20DATA%20MINING/AI%20%26%20data%20mining/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI & Data Mining
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Advanced Digital Signal Processing
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Advanced Digital Signal Processing
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lecture-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lecture 1
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GENETIC%20ALGORITHMS%20%26%20MACHINE%20LEARNING/genetic%20algorithms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genetic Algorithms
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contact/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contacts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="part-1">Part 1</h1>
+<h2 id="lecture-1">Lecture 1</h2>
+<p>From Continuous-Time to Discrete Signals 从连续时间信号到离散信号</p>
+<p>连续时间 continuous-time(CT) 信号的数字处理基本步骤： </p>
+<p>在模数（A/D）转换器之前使用抗混叠滤波器。</p>
+<p>模数（A/D）转换器通过对 CT 信号进行采样，生成有限数量的离散值。</p>
+<p>数字信号处理 (DSP) 系统根据具体应用处理离散时间信号，这是我们的重点。</p>
+<p>数模（D/A）转换器将处理后的离散序列转换为连续时间信号。D/A 之后的重构滤波器可消除基带之外的任何成分。</p>
+<p>这些功能块在不同的应用中都很常见，例如音频、图像或文本处理应用。</p>
+<p><img alt="alt text" src="../image-110.png" /></p>
+<p>Digital Signal Processing 数字信号处理</p>
+<p>DSP 的目标：从信号中提取有用信息。</p>
+<p>DSP 算法取决于信号的类型和信号所携带信息的特征。</p>
+<p>多种信号表示（如时域和变换域）对于 DSP 至关重要。</p>
+<p>数字滤波是 DSP 中应用最广泛的操作： 通过某些频率成分、阻断其他频率成分。</p>
+<p>我们将重点介绍单速率和多速率系统的数字滤波器。</p>
+<p>Sampling Process采样过程</p>
+<p><img alt="alt text" src="../image-111.png" /></p>
+<p>𝑓 和 𝜔是以赫兹和弧度/秒为单位的归一化频率</p>
+<p><img alt="alt text" src="../image-112.png" /></p>
+<p>A/D Conversion A/D 转换</p>
+<p>不同的连续时间（模拟）信号在采样后可能会产生相同的离散时间信号。请看下面的例子</p>
+<p><img alt="alt text" src="../image-113.png" /></p>
+<p>采样设计：将连续时间信号 x(t) 表示为离散时间信号 x(n)，以便日后从 x(n) 中恢复 x(t)。</p>
+<p>数字形式 x(n) 是 x(t) 的近似值。采样的目的是以可接受的成本获得可接受的近似精度。</p>
+<p>采样过程的两个关键参数： </p>
+<ul>
+<li>
+<p>取样频率 𝐹𝑠 </p>
+</li>
+<li>
+<p>每个样本值的位数 </p>
+</li>
+</ul>
+<p>取样设计中的权衡： </p>
+<ul>
+<li>
+<p>𝐹𝑠 和 #bits 应该低，以降低计算成本。</p>
+</li>
+<li>
+<p>𝐹𝑠 和 #bits 应该高，以获得更好的采样精度。</p>
+</li>
+</ul>
+<p>原始信号 x(t) 应从其数字形式 x(n) 恢复，失真度应在可接受范围内。</p>
+<p>Aliasing Formula &amp; Sampling Theorem 混叠公式和采样定理</p>
+<p>Effects of Sampling in the Frequency Domain 频域采样的影响</p>
+<p>假设 ga (t) 是连续时间信号，在时间时刻 t = nT 时进行采样，生成数字序列，T 为采样周期。</p>
+<p><img alt="alt text" src="../image-114.png" /></p>
+<p>采样频率 Sampling frequency: FS = 1/T Hz</p>
+<p>弧度采样频率Radian sampling frequency: ΩT = 2piFS</p>
+<p>ga (t) 的频域表示由其连续时间傅里叶变换（CTFT）给出： </p>
+<p><img alt="alt text" src="../image-115.png" /></p>
+<p>g[n] 的频域表示由其离散时间傅里叶变换 (DTFT) 给出：</p>
+<p><img alt="alt text" src="../image-116.png" /></p>
+<p>DTFT: 分析变换</p>
+<p><img alt="alt text" src="../image-117.png" /></p>
+<p>逆 DTFT：合成变换</p>
+<p><img alt="alt text" src="../image-118.png" /></p>
+<p><img alt="alt text" src="../image-119.png" /></p>
+<ul>
+<li>
+<p>函数与信号域的关系 </p>
+</li>
+<li>
+<p>ICTFT 是逆 CTFT；IDTFT 是逆 DTFT </p>
+</li>
+</ul>
+<p>从 CTFT 推导出 DTFT </p>
+<p><img alt="alt text" src="../image-120.png" /></p>
+<p>可以证明，采样信号的 DTFT 表示为</p>
+<p><img alt="alt text" src="../image-121.png" /></p>
+<p>其中，Ga (Ω) 是 ga (t) 的 CTFT。</p>
+<p>上式被称为消隐公式。理解这个公式对于理解奈奎斯特采样定理至关重要。产生混叠的原因是采样不足，即 Ω𝑇 太小。</p>
+<p>Gp (Ω) 是 Ω 的周期函数，由 Ga (Ω) 的移位和缩放复制品之和组成，移位为 ΩT = 2piFT 的整数倍，缩放为 1/T</p>
+<p><img alt="alt text" src="../image-122.png" /></p>
+<p>k = 0 时的 Gp (Ω) 项是基带部分（与 Ga (Ω)/T 相同），当 |k| &gt; 0 时，其他各项是 Ga (Ω)/T 的频率偏移部分。</p>
+<p>该频率范围被称为基带或奈奎斯特频带，它包含了信号的全部信息：</p>
+<p><img alt="alt text" src="../image-124.png" /></p>
+<p><img alt="alt text" src="../image-123.png" /></p>
+<p>显然，如果 ΩT &gt; 2Ωm（其中 Ωm 是信号中的最大频率），Ga (Ω)/T 产生 Gp (Ω) 的移位复制品之间就不会重叠。</p>
+<p>另一方面，如下图所示，如果 ΩT &lt; 2Ωm，Ga (Ω)/T 的移位复制品之间就会出现重叠，即所谓的混叠效应aliasing effects。</p>
+<p><img alt="alt text" src="../image-125.png" /></p>
+<p>如果 ΩT &lt; 2Ωm，由于移位复制品的重叠，则无法通过 DAC 滤波恢复频谱 Ga (Ω)。这是因为紧靠基带外的部分复制品的失真折回或混叠到基带中（见暗区）。</p>
+<p>滤波器低通带宽内的部分就是恢复信号的频谱。发生混叠时，原始信号无法完美恢复/重建。</p>
+<p>混叠造成的失真量取决于采样频率</p>
+<p>示例：正弦信号的混叠</p>
+<p>考虑 xa (t) = cos (w0 t)，其中 w0 = 2piF0 ，在 F= ±F0 处有频谱线（CTFT）（见图 (a)）。</p>
+<p><img alt="alt text" src="../image-126.png" /></p>
+<p>图 (b) 显示了当 Fs /2 &lt; F0 时采样信号 x(n) 的线谱。</p>
+<p><img alt="alt text" src="../image-127.png" /></p>
+<p>重建始终基于基频范围 |F|≤ Fs /2（见图 (c)）。其他频率被低通滤波器抑制。</p>
+<p>Sampling Theorem 取样定理</p>
+<p>假设 ga (t) 是一个带限信号，当 |Ω| &gt; Ωm 时，CTFT Ga (Ω) = 0，那么如果 ΩT &gt; 2Ωm，其中 ΩT = 2pi/T，则 ga (t) 由其采样 ga (nT)唯一确定，-∞&lt; n &lt; ∞。</p>
+<p>ΩT &gt; 2Ωm 这一条件通常被称为奈奎斯特条件Nyquist condition。</p>
+<p>频率 ΩT /2 通常被称为折叠频率folding frequency。</p>
+<p>ga (t) 中包含的最高频率 Ωm 通常被称为奈奎斯特频率Nyquist frequency，因为它决定了从其样本中完全恢复 ga (t) 所必须使用的最小采样频率 ΩT = 2Ωm 。</p>
+<p>频率 2Ωm 被称为奈奎斯特速率Nyquist rate。</p>
+<p>例：</p>
+<p><img alt="alt text" src="../image-128.png" /></p>
+<ul>
+<li>
+<p>过采样 Oversampling - 采样频率高于奈奎斯特采样率，这将在后面的章节中讨论 </p>
+</li>
+<li>
+<p>低采样 Undersampling - 采样频率低于奈奎斯特采样率，这将始终避免</p>
+</li>
+<li>
+<p>临界采样 Critical sampling - 采样频率等于奈奎斯特采样率，这在实践中并不常用 </p>
+</li>
+</ul>
+<p>应用示例 ： </p>
+<ul>
+<li>
+<p>在数字电话中，3.4 kHz 的信号带宽可用于电话通话，而采样率为 8 kHz，大于信号带宽的两倍。</p>
+</li>
+<li>
+<p>在高质量的模拟音乐信号处理中，20 kHz 的带宽已被确定用于保持保真度。因此，在光盘（CD）音乐系统中，使用的采样率为 44.1 kHz，略高于信号带宽的两倍。</p>
+</li>
+<li>
+<p>采样频率通常会受到系统实施限制的影响。</p>
+</li>
+</ul>
+<p>总结：</p>
+<p>了解混叠效应对 DSP 研究非常重要，因为采样频率直接关系到性能和计算成本。如果不充分了解这种效应，就很难理解频谱，如数字序列的 DFT 或系统传递函数。更多信息，请参阅 Proakis 一书的第 6.1 节。</p>
+<p>要点： 了解混叠公式和采样定理 ▪ 从数字采样中恢复原始信号的条件和方法是什么？音频和图像信号有哪些混叠现象？</p>
+<p>问题： 各种信号的最基本要素是什么？无法单独描述所有信号，需要统一的方法。</p>
+<p>让-巴蒂斯特-傅里叶（Jean Baptiste Fourier，1768-1830 年）给出了一种解决方案。他得出结论，所有信号都可以通过组合不同频率和振幅的正弦波产生。</p>
+<p>DTFT - Representation in Frequency Domain 频域表示法</p>
+<p>离散时间傅里叶变换 (DTFT) 通常用于观察数字信号 x(n) 的频率内容。</p>
+<p><img alt="alt text" src="../image-129.png" /></p>
+<p>信号 x(n) 可以通过以下方法从连续 X(w) 中恢复出来</p>
+<p><img alt="alt text" src="../image-130.png" /></p>
+<p>周期特性（消隐公式的基本结果）： 我们总是能观察到一个周期的频谱，即从 0 到 FT Hz，其中 FT 是采样频率。</p>
+<p><img alt="alt text" src="../image-131.png" /></p>
+<p>我们通常只使用频谱的前半部分</p>
+<p>频谱通常以频率 0 ≤ f &lt; FT 和弧度频率 0 ≤ w &lt; wT =2piFT 的形式给出。频谱的其他部分是这一周期的重复</p>
+<p>或归一化频率 0 ≤ f / FT &lt; 1.0 和归一化弧度频率 0 ≤ w ≤ 2pi</p>
+<p><img alt="alt text" src="../image-132.png" /></p>
+<p>这种反应不是因果关系，无法实现（只存在于理论中）</p>
+<p>如果一个系统的当前输出仅取决于输入的当前值和过去值，则该系统被称为因果系统(causal)。例如，x[n+1] 是未来的信号，x[n-1] 是过去的信号，那么</p>
+<p><img alt="alt text" src="../image-133.png" /></p>
+<p>必须采取措施改变系统的因果性。例如，在频率响应中增加额外的相位，或在系统脉冲响应中增加时域延迟。</p>
+<p><img alt="alt text" src="../image-134.png" /></p>
+<p><img alt="alt text" src="../image-135.png" /></p>
+<p>为了因果关系和可实现性，h(n) 必须在有限的持续时间内，并按序列长度的二分之一移动（见上图方框内的响应） </p>
+<p>响应的有限长度将导致 - 通带和阻带中的波纹 - 阻带和通带之间的过渡带。</p>
+<p>离散时间系统的描述如下</p>
+<p><img alt="alt text" src="../image-136.png" /></p>
+<p>在本课程中，我们将只处理线性时间不变 linear-time invariant（LTI）系统。</p>
+<p><img alt="alt text" src="../image-137.png" /></p>
+<p>写为：</p>
+<p><img alt="alt text" src="../image-138.png" /></p>
+<p>∗ 是卷积算子。</p>
+<p>请熟记离散时间变量傅里叶变换表中的所有等式</p>
+<p><img alt="alt text" src="../image-139.png" /></p>
+<p>Discrete Fourier Transform 离散傅立叶变换</p>
+<p>对于 N 点输入序列，离散傅里叶变换 (DFT) 的定义为</p>
+<p><img alt="alt text" src="../image-140.png" /></p>
+<p>X(k) 是离散的，可视为 DTFT 在频域的采样。</p>
+<p>因此，DFT 的分辨率为 FT /N（以赫兹为单位）或（2piF/N，以弧度为单位），其中 FT 是信号的采样频率。</p>
+<p>例如，如果信号的采样频率为 8 kHz，则 1024 点 DFT 的一个点表示 8000/1024 Hz 的分辨率。</p>
+<p>DFT 通常以其快速算法（FFT）用于实际计算。相比之下，DTFT 更多用于理论表述。</p>
+<p>从 CTFT 推导出 DFT</p>
+<p><img alt="alt text" src="../image-141.png" /></p>
+<p><img alt="alt text" src="../image-142.png" /></p>
+<p>展开后，我们得到以下线性方程组 </p>
+<p><img alt="alt text" src="../image-143.png" /></p>
+<p><img alt="alt text" src="../image-144.png" /></p>
+<p>2、3 和 4 的 DFT 矩阵如下、</p>
+<p><img alt="alt text" src="../image-145.png" /></p>
+<p>Discrete-Time Short-Time Fourier Transform 离散时间短时傅里叶变换</p>
+<p>短时离散时间傅里叶变换（STFT）是一种在时频域揭示信号频谱时变特性的简单方法。</p>
+<p>频段 n0 的频谱表示为</p>
+<p><img alt="alt text" src="../image-146.png" /></p>
+<p>其中，w[n] 是一个 N 点窗口函数，用于将输入划分为 N 个点段。</p>
+<p>STFT 是点-N DFT 的序列。x(n) 的频谱图定义为 |STFT(x, n0 , k)| 或 log |STFT(x,n0,k)|，它是 n0 和 k 的函数。</p>
+<p>Fast Fourier Transform快速傅立叶变换 (FFT)</p>
+<p>在实际应用中，快速傅立叶变换（FFT）被广泛用于计算 DFT。N 点 DFT 定义为</p>
+<p><img alt="alt text" src="../image-147.png" /></p>
+<p>FFT 基于变换核 WN 的对称和周期特性。例如</p>
+<p><img alt="alt text" src="../image-148.png" /></p>
+<p>然后，在 k = 0、1......、N/2 时，我们有两个 N/2 点 DFT </p>
+<p><img alt="alt text" src="../image-149.png" /></p>
+<p>蝴蝶计算是</p>
+<p><img alt="alt text" src="../image-150.png" /></p>
+<p>重复上述分解步骤，每个 N/2 点 DFT 可以分解成另外两个 N/4 点 DFT</p>
+<p>这样的程序可以重复进行，直到得到 2 点 DFT，这也是一种蝶式计算（见图）</p>
+<p><img alt="alt text" src="../image-151.png" /></p>
+<p><img alt="alt text" src="../image-152.png" /></p>
+<p><img alt="alt text" src="../image-153.png" /></p>
+<p>总之，N 点 DFT 将有 (N/2)log2N 个蝴蝶 </p>
+<p>每个蝴蝶需要两个复数加法和一个复数乘法。</p>
+<p>N 点 DFT 的直接计算需要 N2 次复数乘法和 N(N-1) 次复数加法 </p>
+<p>FFT 节省的复数乘法次数为 2N/log2N 倍。例如，N =1024 时可节省 204.8 倍。</p>
+<p>Radix-2 算法要求 N 的大小是 2 的幂次。</p>
+<p>许多其他类型的快速算法都能处理 N 为合成数的情况。</p>
+<p>Zero-Padding a Signal 信号零填充</p>
+<p><img alt="alt text" src="../image-154.png" /></p>
+<p>重要提示：填充零点可提高 DFT/FFT 的精度，但不能提高分辨率。FFT 的分辨率由瑞利极限决定 Rayleigh limit，即 ∆𝑓𝑁 = 𝐹𝑠 / N。</p>
+<p><img alt="alt text" src="../image-155.png" /></p>
+<p><img alt="alt text" src="../image-156.png" /></p>
+<p>总结：</p>
+<p>我们只能复习 DTFT 和 DFT 的基础知识。必要时，需要自学教材。</p>
+<p>我们只能复习 DTFT 和 DFT 的基础知识。必要时，需要自学教材。</p>
+<ul>
+<li>
+<p>充分了解信号在频域中的表示方法</p>
+</li>
+<li>
+<p>能够使用 DTFT 和 DFT 表示信号</p>
+</li>
+<li>
+<p>熟悉 DTFT 和 DFT 的特性 </p>
+</li>
+<li>
+<p>基本了解时频表示法 STFT 和 FFT。</p>
+</li>
+</ul>
+<p>o CFT - 连续傅里叶变换，用于模拟信号，时域和频域连续 </p>
+<p>o DTFT - 离散时间傅里叶变换，用于数字信号，时域离散，频域连续 </p>
+<p>o DFT - 离散傅里叶变换，用于数字信号，时域和频域均离散。</p>
+<p>o STFT - 短时傅里叶变换，用于带窗口的长信号，时域和频域均离散。</p>
+<p>o 频域中弧度频率（弧度）和频率（赫兹）的使用 w=2pif 用于模拟信号，归一化弧度频率和频率用于数字信号 w=2pif/FT</p>
+<p>DTFT 和 DFT 之间的关系</p>
+<p><img alt="alt text" src="../image-157.png" /></p>
+<p>DFT resolution DFT 分辨率</p>
+<p>请注意，DFT 的 N 个点覆盖了 0 和 𝑓𝑠 之间的模拟频率。</p>
+<p>采样频率，即频率样本之间的间隔为 𝑓𝑠 / N，被定义为 DFT 分辨率或 DFT 频率间隔 frequency spacing。</p>
+<p><img alt="alt text" src="../image-158.png" /></p>
+<p>是 DFT 元素的频率。当 k = N/2 时，就达到了 𝑓𝑠 / 2 Hz 的奈奎斯特极限，因此 DFT 的各点可以完全描述 DFT 的幅度和相位频谱。</p>
+<p>频率间隔越小，分辨率越高；频率间隔越大，分辨率越低。如果采样频率恒定，则使用的点越多，分辨率就越高，这样频率间距就越小，就能获得频谱的细节。</p>
+<p><img alt="alt text" src="../image-159.png" /></p>
+<p>DFT 是一种重要的数字信号处理工具，但由于计算量大，在 DSP 软件包中并不实用 </p>
+<p>快速傅立叶变换的计算效率很高，可得到与 DFT 相同的结果。</p>
+<p>FFT 算法包括 </p>
+<ul>
+<li>
+<p>时间内去量化 FFT 将信号 x[n] 分解为子序列（如 Radix-2 时间内去量化 FFT） </p>
+</li>
+<li>
+<p>频率内去量化 FFT 将频谱值 X[k] 分解为子序列 </p>
+</li>
+</ul>
+<p>大多数算法遵循分而治之的原则</p>
+<p>Radix-2 decimation in time FFT 时间 FFT 中的 Radix-2 抽取</p>
+<p>考虑长度为 N 的信号，让 N 为 2 的幂</p>
+<p>分而治之：该方法依赖于将计算分成两部分，例如，N→N/2→N/4→N/8......</p>
+<p>原则：1 N 点计算等同于 2 N/2 点计算，等等......</p>
+<p><img alt="alt text" src="../image-160.png" /></p>
+<p>一步 Radix-2 分时 FFT</p>
+<p><img alt="alt text" src="../image-161.png" /></p>
+<p><img alt="alt text" src="../image-162.png" /></p>
+<p>一个阶段的 Radix-2 分时 FFT 可以从 2 个 N/2 点 FFT 和产生一个 N 点 FFT。每个 N/2 点 FFT 可由 2 N/4 点 FFT 得到，以此类推，继续向后得到 2 点 FFT。</p>
+<p><img alt="alt text" src="../image-163.png" /></p>
+<p><img alt="alt text" src="../image-164.png" /></p>
+<p><img alt="alt text" src="../image-165.png" /></p>
+<p><img alt="alt text" src="../image-166.png" /></p>
+<p><img alt="alt text" src="../image-167.png" /></p>
+<p>DFT 和 FFT 的运算次数 </p>
+<p><img alt="alt text" src="../image-169.png" /></p>
+<p>The Processing Systems of Digital Signals and Their Classifications数字信号的处理系统及其分类</p>
+<p>LTI 离散系统 </p>
+<p>▪ 描述信号处理系统 - 传递函数 </p>
+<p>▪ 线性时不变（LTI）数字传递函数 </p>
+<p>传递函数的类型 </p>
+<ul>
+<li>
+<p>基于其脉冲响应 h(n) 的长度：</p>
+</li>
+<li>
+<p>有限脉冲响应 (FIR) 传递函数，是非递归的 </p>
+</li>
+<li>
+<p>无限脉冲响应 (IIR) 传递函数，是递归的 </p>
+</li>
+<li>
+<p>基于频率选择响应的数字传递函数，我们有 </p>
+</li>
+<li>
+<p>基于幅度函数 |H(e jw)| 的形状进行分类 </p>
+</li>
+<li>
+<p>基于相位函数 θ() 的形式进行分类</p>
+</li>
+</ul>
+<p>Classification Based on Mag. Characteristics</p>
+<p>通过特定频率而不失真数字滤波器在这些频率上的频率响应等于 1，而在所有其他频率上的频率响应等于 0 。</p>
+<p>频率响应取值为 1 的频率范围称为通带passband </p>
+<p>频率响应取值为零的频率范围称为阻带stopband </p>
+<p>四种常用的具有实脉冲响应的理想数字滤波器的频率响应如图所示 </p>
+<p><img alt="alt text" src="../image-170.png" /></p>
+<p>这些规格的反 DTFT 通常称为脉冲响应 h(n)，它是一个时域函数。</p>
+<p>wc 或 wc1 和 wc2 的频率称为截止频率 </p>
+<p>这些理想滤波器在通带的幅度响应等于 1，在阻带的幅度响应等于 0，并且在任何地方的相位都为 0，即产生输出时没有延迟。</p>
+<p>具有 “砖墙brick wall ”频率响应的理想滤波器不是因果关系，无法用有限长度 LTI 滤波器实现。</p>
+<p>Ideal Characteristics of Standard Filters 标准过滤器的理想特性</p>
+<p><img alt="alt text" src="../image-171.png" /></p>
+<p><img alt="alt text" src="../image-172.png" /></p>
+<p>总结：</p>
+<p><img alt="alt text" src="../image-173.png" /></p>
+<p><img alt="alt text" src="../image-174.png" /></p>
+<p><img alt="alt text" src="../image-175.png" /></p>
+<p>为了开发稳定且可实现的传递函数，理想的频率响应规格被放宽，在通带和阻带之间加入了一个过渡带。</p>
+<p>这一近似值允许幅值响应从通带的最大值缓慢衰减到阻带的零值。</p>
+<p>图 2 显示了低通滤波器的典型幅值响应规格。</p>
+<p><img alt="alt text" src="../image-176.png" /></p>
+<p>Classification Based on Phase Characteristics</p>
+<p><img alt="alt text" src="../image-177.png" /></p>
+<p>希望通过一定频率范围内的输入信号成分时，幅度和相位都不失真、 </p>
+<p>如图所示，传递函数在相关频带内应表现出统一的幅度响应和线性相位响应。</p>
+<p>由于阻带中的信号分量被阻断，因此阻带中的相位响应可以是任何形状。</p>
+<p><img alt="alt text" src="../image-178.png" /></p>
+<p>如果我们选择 n0 = N/2，N 为正整数，那么截断和移位近似值</p>
+<p><img alt="alt text" src="../image-179.png" /></p>
+<p>将是一个长度为 N 的因果线性相位 FIR 滤波器</p>
+<p><img alt="alt text" src="../image-180.png" /></p>
+<p>上述规格近似于 HLP(e j) 的线性相位传递函数。</p>
+<p>如何实现过滤器？过滤器的结构 </p>
+<p>Digital Filter Structures</p>
+<p>一般来说，无限脉冲响应（IIR）有限时间系统的表达式为</p>
+<p><img alt="alt text" src="../image-181.png" /></p>
+<p>具有无限长的脉冲响应。</p>
+<p>有限脉冲响应（FIR）滤波器是线性时间不变（LTI）离散时间系统卷积和的一种特殊情况。</p>
+<p><img alt="alt text" src="../image-182.png" /></p>
+<p>LTI 数字滤波器的实际实现可以采用软件或硬件形式，具体取决于应用情况</p>
+<p>一个实际问题是，无论在哪种情况下，由于有限字长效应，信号样本和滤波器系数都无法以无限精度表示 </p>
+<p>由于有限精度运算，直接实现数字滤波器和可能无法提供令人满意的性能 </p>
+<p>开发替代实现方法并选择在有限精度运算下提供令人满意性能的结构具有实际意义 </p>
+<p>使用相互连接的基本构件进行结构表示是实现 LTI 数字滤波器硬件或软件的第一步 </p>
+<p>为了实现 LTI 数字滤波器、 输入输出关系必须由有效的计算算法来描述</p>
+<p>Filter Structures – Basic Building Blocks 过滤器结构--基本构件</p>
+<p>LTI 数字滤波器的计算算法可以用信号框图的形式方便地表示出来，其基本构件如下所示</p>
+<p><img alt="alt text" src="../image-183.png" /></p>
+<p>方框图表示法的优点 - 通过检查易于写出计算算法 - 通过分析方框图易于确定输出和输入之间的明确关系</p>
+<p>Filter Structures – Analysis of Block Diagrams 滤波器结构 - 方框图分析</p>
+<p>易于操作和推导其他等效框图，产生不同的计算算法 - 易于确定硬件要求 - 更易于直接从传递函数开发框图表示法</p>
+<p>步骤：</p>
+<p>▪ 将每个加法器的输出信号写成其输入信号之和的表达式， ▪ 根据所有内部信号建立一组与滤波器输入和输出信号相关的方程 ▪ 消除不需要的内部变量，得到输出信号作为输入信号和作为乘法器系数的滤波器参数的函数的表达式</p>
+<p>示例 分析下面的级联晶格结构，为简洁起见，不显示信号变量的 Z 依赖性 </p>
+<p><img alt="alt text" src="../image-184.png" /></p>
+<p><img alt="alt text" src="../image-185.png" /></p>
+<p><img alt="alt text" src="../image-186.png" /></p>
+<p>Filter Structures – Canonic Structures  过滤器结构 - 调谐结构 </p>
+<p>如果框图表示中的延迟数等于传递函数的阶数，则数字滤波器结构为调谐结构，否则为非调谐结构。</p>
+<p><img alt="alt text" src="../image-187.png" /></p>
+<p>上图所示结构是非调谐结构，因为它使用两个延迟来实现一阶差分方程</p>
+<p><img alt="alt text" src="../image-188.png" /></p>
+<p>通常情况下，一个调谐结构所需的实施成本最低</p>
+<p>例：</p>
+<p><img alt="alt text" src="../image-189.png" /></p>
+<p>Equivalent FIR Filter Structures 等效 FIR 滤波器结构</p>
+<p>可能有助于减少字长效应和硬件复杂性</p>
+<p>Filter Structures - Equivalent Structures 滤波器结构 - 等效结构</p>
+<p>如果两个数字滤波器结构具有相同的传递函数，则定义为等效结构 </p>
+<p>▪ 从给定实现生成等效结构的一个简单方法是通过转置操作，具体如下 </p>
+<ul>
+<li>
+<p>反转所有路径方向 </p>
+</li>
+<li>
+<p>用加法器替换剔除节点，反之亦然 </p>
+</li>
+<li>
+<p>交换输入和输出节点</p>
+</li>
+</ul>
+<p><img alt="alt text" src="../image-190.png" /></p>
+<p>所有其他开发等效结构的方法都基于针对每种结构的特定算法。</p>
+<p>实现相同传递函数的等效结构有无数种。由于不可能开发所有等效实现方法，我们主要讨论一些常用结构</p>
+<p>Filter Structures – Basic FIR Filter Structure 滤波器结构 - 基本 FIR 滤波器结构</p>
+<p>在某些情况下，可以开发出量化效应最小的结构。阶数为 N 的因果 FIR 滤波器的传递函数 H(z) 的特点是</p>
+<p><img alt="alt text" src="../image-191.png" /></p>
+<p>是 z -1 的多项式。</p>
+<p>在时域中，上述 FIR 滤波器的输出输入关系式为</p>
+<p><img alt="alt text" src="../image-192.png" /></p>
+<p>阶数为 N 的 FIR 滤波器具有 N+1 个系数，一般需要 N+1 个乘法器和 N 个 2 输入加法器</p>
+<p>滤波器结构 - 直接形式 FIR</p>
+<p>乘法器系数正是传递函数系数的结构称为直接形式结构。</p>
+<p>在 N = 4 的情况下，FIR 滤波器的直接形式实现可以很容易地从卷积和描述中发展出来，如下所示</p>
+<p><img alt="alt text" src="../image-193.png" /></p>
+<p>直接形式结构也称为分接延迟线或横向滤波器</p>
+<p>前面所示的直接形式结构的转置如下所示</p>
+<p><img alt="alt text" src="../image-194.png" /></p>
+<p>这两种直接形式结构在延迟方面都是卡侬式的 </p>
+<p>▪ 观察延时元件的排列和用于转置结构的系数的位置，以验证转置操作。</p>
+<p>总结：</p>
+<p>滤波器的类型和分类。能够根据以 z 域表示的传递函数分析滤波器的类型 ▪ 能够从给定的信号流图推导出滤波器传递函数 ▪ 能够从给定的滤波器结构推导出等效结构。</p>
+<p>Representation of a Filter 过滤器的表示方法</p>
+<p><img alt="alt text" src="../image-195.png" /></p>
+<p>如何转换为频域表示法： ▪ 通过 z 变换获得传递函数 </p>
+<p><img alt="alt text" src="../image-196.png" /></p>
+<p><img alt="alt text" src="../image-197.png" /></p>
+<p><img alt="alt text" src="../image-198.png" /></p>
+<p><img alt="alt text" src="../image-199.png" /></p>
+<p><img alt="alt text" src="../image-200.png" /></p>
+<p>Equivalent FIR Filter Structures 等效 FIR 滤波器结构 </p>
+<p>可能有助于降低字长效应和硬件复杂性</p>
+<p>Filter Structures – Basic FIR Filter Structure 滤波器结构 - 基本 FIR 滤波器结构 </p>
+<p>在某些情况下，可以开发出量化效应最小的结构。阶数为 N 的因果 FIR 滤波器的传递函数 H(z) 的特征是</p>
+<p><img alt="alt text" src="../image-201.png" /></p>
+<p>在时域中，上述 FIR 滤波器的输出输入关系式为</p>
+<p><img alt="alt text" src="../image-202.png" /></p>
+<p>阶数为 N 的 FIR 滤波器具有 N+1 个系数，一般需要 N+1 个乘法器和 N 个 2 输入加法器</p>
+<p>Filter Structures – Direct Form FIR 滤波器结构 - 直接形式 FIR</p>
+<p>乘法器系数正是传递函数系数的结构称为直接形式结构。</p>
+<p>在 N = 4 的情况下，FIR 滤波器的直接形式实现可以很容易地从卷积和描述中发展出来，如下所示</p>
+<p><img alt="alt text" src="../image-203.png" /></p>
+<p>Filter Structures – Cascaded Form FIR滤波器结构 - 级联形式 FIR</p>
+<p>高阶 FIR 传输函数可以由一阶和二阶 FIR 部分级联实现</p>
+<p><img alt="alt text" src="../image-204.png" /></p>
+<p>N = 6 的级联实现如图所示</p>
+<p><img alt="alt text" src="../image-205.png" /></p>
+<p>系数 β1k 和 β2k 是直接形式的系数函数</p>
+<p>Filter Structures – Linear Phase FIR 滤波器结构 - 线性相位 FIR</p>
+<p>中间一大段</p>
+<p>可以利用线性相位 FIR 滤波器的对称（或不对称）特性，将乘法器数量减少到直接形式实现方法的近一半。</p>
+<p><img alt="alt text" src="../image-206.png" /></p>
+<p>对于偶数滤波器长度的 II 型 FIR 传递函数，也可以采用类似的分解方法</p>
+<p><img alt="alt text" src="../image-207.png" /></p>
+<p>注：长度为 7 的 FIR 滤波器的 I 型线性相位结构需要 4 个乘法器，而直接形式的实现需要 7 个乘法器。</p>
+<p>注：长度为 8 的 FIR 滤波器的 II 型线性相位结构需要 4 个乘法器，而直接形式的实现需要 8 个乘法器</p>
+<p><img alt="alt text" src="../image-208.png" /></p>
+<p><img alt="alt text" src="../image-209.png" /></p>
+<p><img alt="alt text" src="../image-210.png" /></p>
+<p>Specifications of Filters 过滤器规格</p>
+<p>数字滤波器设计目标： 确定可实现的传递函数 G(z)，逼近给定的频率响应规格。</p>
+<p>一般分为有限脉冲响应（FIR）和无限脉冲响应（IIR）两类。</p>
+<p>IIR 滤波器的 G(z) 应该是两个 z 多项式的稳定实有理函数。</p>
+<p>FIR 滤波器的 G(z) 是一个多项式，并且始终稳定，为什么？</p>
+<p>数字滤波器设计是推导传递函数 G(z) 以逼近预期规格的过程。</p>
+<p>大多数应用都会指定数字滤波器的幅度和/或相位（延迟）响应。</p>
+<p>我们感兴趣的问题是如何根据给定的幅值响应规格开发可实现的近似值。</p>
+<p>我们主要讨论 FIR 滤波器的幅值近似 </p>
+<p>数字滤波器在通带和阻带的幅值响应规格是根据一些可接受的公差给出的 </p>
+<p>此外，还规定了通带和阻带之间的过渡带 </p>
+<p>例如，数字低通滤波器的幅度响应 G(e jw) 如图所示 </p>
+<p>同样，其他类型的滤波器也有过渡带。</p>
+<p><img alt="alt text" src="../image-211.png" /></p>
+<p><img alt="alt text" src="../image-212.png" /></p>
+<p>G(e jw) 是 w 的周期函数，|G(e jw)| 是实系数滤波器的频谱幅度，是 w 的偶函数。因此，滤波器规格仅适用于 0 ≤ w≤ pi 的频率范围。</p>
+<p><img alt="alt text" src="../image-213.png" /></p>
+<p>规格通常以损耗函数 A() = -201og |G(e j)| dB 表示 </p>
+<p><img alt="alt text" src="../image-214.png" /></p>
+<p>在这里，通带中的幅度最大值被指定为统一值（或 0 dB） </p>
+<p><img alt="alt text" src="../image-215.png" /></p>
+<p>在数字滤波器设计中，需要使用以下方法计算归一化频带边缘频率（单位为 Hz</p>
+<p><img alt="alt text" src="../image-216.png" /></p>
+<p><img alt="alt text" src="../image-217.png" /></p>
+<p>对于 FIR 数字滤波器的设计，传递函数是 z -1 的实系数多项式 </p>
+<p>如果需要线性相位，滤波器系数必须满足以下约束条件：h[n] = ± h[N - n]，n = 0，1，...，N/2-1 或 (N+1)/2-1。</p>
+<p>FIR 滤波器的优点： - 可以设计出精确的线性相位， - 在系数量化的情况下，滤波器结构总是稳定的 </p>
+<p>FIR 滤波器的缺点： - FIR 滤波器的阶数大大高于满足相同振幅规格的等效 IIR 滤波器的阶数，因此 FIR 滤波器的计算复杂度更高（为什么？）</p>
+<p>如何计算滤波器系数以满足规范要求？、</p>
+<p>Digital Filter Design – Basic Approach 数字滤波器设计--基本方法</p>
+<p>FIR 滤波器的设计基于对指定幅度响应的直接近似，并增加了对线性相位的要求。</p>
+<p>阶数为 N 的 FIR 滤波器的设计可通过寻找长度为（N+1）的脉冲响应样本 {h[n]} 或其频率响应的（N+1）样本 H(e j) 来完成 </p>
+<p>▪ FIR 滤波器设计的三种常用方法 - 窗口法 - 频率采样法 - 基于计算机的优化方法 </p>
+<p>▪ 我们将重点讨论窗口法。</p>
+<p>设计 FIR 数字滤波器 - 窗口法</p>
+<p>一大段</p>
+<p>Why and What is Multi-Rate Signal
+Processing? 为什么要进行多速率信号处理？</p>
+<p>采样理论：DSP 的基本概念，FT 大于等于 2Fmax，其中 Fmax 是信号的带宽或最大频率。</p>
+<p>合适的采样率决定了处理系统的计算效率和/或精度。为了获得更好的性能，采样率应尽可能高，字长应尽可能长。</p>
+<p>不过，无论何时何地，只要涉及计算复杂性，采样率和字长都应尽可能小。</p>
+<p>许多应用的输入采样率已经预先确定，而功能模块或系统的输出通常需要不同的采样率。</p>
+<p>例如，广播使用 32 kHz 采样频率，数字 CD 使用 44.1 kHz 采样频率，数字音频磁带使用 48 kHz 采样频率，所有这些都包含在一个高保真系统中。</p>
+<p>低通滤波器输出的带宽小于 W。</p>
+<p>滤波器之后的其他处理系统有可能使用更小的采样频率，即通信系统中的解复用操作。</p>
+<p>需要在其他处理过程中使用合适的采样频率，从而有效降低整体计算复杂度。</p>
+<p>在同一系统中，经常使用多种采样率，以最大限度地降低计算复杂度，达到可接受的性能。</p>
+<p>将信号从给定的采样率转换为另一种采样率的过程称为采样率转换（SRC）；使用多种采样率的系统称为多速率 DSP 系统；</p>
+<p>采样率转换也可以通过将信号通过 D/A 转换器、必要时进行滤波以及按所需速率对产生的信号进行重新采样来实现。</p>
+<p>由于在复杂的数字信号处理系统中通常需要进行采样率转换，因此转换最好在数字域中进行，这样性能更好，处理成本更低。</p>
+<p>要从采样率为 Fx 的给定数字信号生成采样率为 Fy 的数字信号 , </p>
+<p>我们需要一个线性时变系统；</p>
+<p>输出 y(m) 是来自 x(n) 的估计版本；</p>
+<p>注意 y(m) 和 x(n) 使用不同的时间指数 m 和 n。</p>
+<p>系统为 x(n)的第 i 个采样提供平坦的振幅响应和时间延迟 t i。特别是，t i 对于不同的 i 是时变的，这意味着滤波器是时变的；</p>
+<p>一般来说，y(n) 应提供与 x(n) 相同的信息，使它们都能重建相同的原始信号。</p>
+<p>我们将研究系统 h(n,m)的要求和设计，其中 n 和 m 是输入和输出的时间索引。 多速率处理有几个优点，包括  更少的计算需求；</p>
+<p>更少的滤波器系数和信号历史存储； 更低阶的滤波器设计/实现；</p>
+<p>更少的有限运算效应。</p>
+<p>这些优势必须与处理采样率变化所需的硬件和软件实施开销的额外复杂性相权衡。</p>
+<h1 id="part-2">Part 2</h1>
+<h2 id="introduction-and-mathematical-background">Introduction and mathematical background 导言和数学背景</h2>
+<h3 id="definition-and-taxonomy-of-systems-and-signals">Definition and taxonomy of systems and signals 系统、信号的分类</h3>
+<p>系统的定义 system</p>
+<p>系统是一个实体，它操纵一个或多个信号来实现某种功能，并反过来产生新的信号。</p>
+<p>系统的分类：</p>
+<p><img alt="alt text" src="../image.png" /></p>
+<p>信号的定义 signal</p>
+<p>信号传递有关物理现象性质的信息，是时间、空间或任何其他独立变量的函数</p>
+<p>信号的分类：</p>
+<p><img alt="alt text" src="../image-1.png" /></p>
+<p>Deterministic signals 确定性信号</p>
+<p>确定性信号是指可以通过重复过程精确再现的信号。</p>
+<p>Chaotic signals 混沌信号</p>
+<p>混沌信号来自一个混沌系统，该系统由参数固定的非线性微分方程耦合系统定义。混沌系统对初始条件非常敏感，因此只能在短期内预测。</p>
+<blockquote>
+<p>例：流体湍流和雷达海杂波。</p>
+</blockquote>
+<p>Random signals 随机信号</p>
+<p>随机信号是一种无法以可预测的方式重复的信号，也就是说，它包含一个随机变量。</p>
+<blockquote>
+<p>例：收音机或电视机等电子设备电阻器中产生的热噪声电压 
+气温和气压等气象现象随时间随机波动，或 x[n] = 10cos(2πn-θ)，其中 θ 是随机变量，统计上均匀分布在 (-π,π) 范围内。
+语音，如果它被视为来自一般语音过程的所有可能信号</p>
+</blockquote>
+<p>两个关键： Mean、Variance 均值、方差</p>
+<h3 id="random-variables-and-statistics">Random variables and statistics 随机变量和统计</h3>
+<p>Discrete random variables 离散随机变量</p>
+<p>离散型随机变量（r.v.） X 最多有可数的可能值。</p>
+<blockquote>
+<p>让 X 表示 r.v.，它被定义为两个公平骰子的和。样本空间由 S={(1,1),(1,2),(1,3),...,(6,4),(6,5),(6,6)} 给出，大小为 36。考虑 X = 4 的事件，则 E ={(1,3),(2,2),(3,1)} ⊂ S 且 P(E) =P({X =4})= 3/36。</p>
+</blockquote>
+<p>Probability mass function 概率质量函数</p>
+<p>X 的概率质量函数（p.m.f）定义为 p(a) =P({X =a})&gt;0</p>
+<p>所有p（a）之和等于1</p>
+<p>Cumulative distribution function 累积分布函数c.d.f.</p>
+<p>R.v.X 的累积分布函数（c.d.f）F 定义如下： F(a) = P({X≤a})</p>
+<p>Continuous random variables 连续随机变量</p>
+<p>一个连续的随机变量（r.v. X）可以有无数个可能的值。</p>
+<p>Probability density function 概率密度函数p.d.f.</p>
+<p><img alt="alt text" src="../image-2.png" /></p>
+<p>Cumulative distribution function 累积分布函数</p>
+<p><img alt="alt text" src="../image-3.png" /></p>
+<p>Expectation of a random variable 随机变量的期望值</p>
+<p>X 的期望值是 X 可能取值的加权平均值，每个值都是 X 取该值的概率</p>
+<p><img alt="alt text" src="../image-4.png" /></p>
+<p>R.v. X 的期望值称为 X 的均值或第一矩。mean or the first moment</p>
+<p>Variance of a random variable 随机变量的方差</p>
+<p>随机变量 X 的方差是 X 偏离其期望值的期望平方</p>
+<p><img alt="alt text" src="../image-5.png" /></p>
+<blockquote>
+<p><span class="arithmatex">\(V(X) = E(X^2)-(E(X))^2\)</span></p>
+</blockquote>
+<p>常见函数的均值方差：</p>
+<p>离散随机变量：
+<img alt="alt text" src="../image-6.png" /></p>
+<p>连续随机变量：
+<img alt="alt text" src="../image-7.png" /></p>
+<p>Jointly distributed discrete random variables 联合分布离散随机变量</p>
+<p>X 和 Y 的联合概率质量函数定义为 p(x,y) = P({X =x,Y =y})</p>
+<p>Jointly distributed continuous random variables 联合分布的连续随机变量</p>
+<p>如果满足以下条件，则 X 和 Y 的联合概率密度函数定义为 f (x,y)</p>
+<p><img alt="alt text" src="../image-8.png" /></p>
+<p>Independent random variables 独立随机变量</p>
+<p>随机变量 X 和 Y 是独立的，如果对于所有 a、b： P({X ≤a,Y ≤b})=P({X ≤a})P({Y ≤b})</p>
+<blockquote>
+<p>如果 X 和 Y 是独立的，那么对于任意函数 g 和 h，E[g(X)h(Y)] = E[g(X)]E[h(Y)]。</p>
+</blockquote>
+<p>Correlation and Covariance of two random variables 两个随机变量的相关性和协方差</p>
+<p>两个随机变量 X 和 Y 的相关性由 ρXY =corr(X,Y)=E[XY] 定义，衡量两个变量如何相互影响。</p>
+<p>两个随机变量 X 和 Y 的协方差定义为 σXY =cov(X,Y) =  ρXY-µXµY，衡量一个随机变量与另一个随机变量的偏差。</p>
+<blockquote>
+<p>如果 X 和 Y 是独立的 R.v.，则 cov(X,Y) = 0</p>
+</blockquote>
+<p>练习：</p>
+<p>1、Calculate the mean and the variance of the random variable uniformly distributed（均匀分布） over the interval (−π,π)</p>
+<p>2、 Show that var(X+Y)=var(X)+var(Y)+2cov(X,Y)</p>
+<h3 id="stochastic-processes-and-ensemble-statistics">Stochastic processes and ensemble statistics 随机过程和集合统计</h3>
+<p>Stochastic/random process 随机/随机过程</p>
+<p>随机/随机过程是描述某个（物理）过程随时间演变的所有可能时间函数的族或集合：{X(t,S),t∈T}  其中，t 是时间索引，S 是所有可能样本函数的集合（样本空间）。</p>
+<p>如果 T 是一个可数集，那么 X[n,S] 是一个离散时间过程。如果 T 是实线的区间，那么 X(t,S) 是连续时间过程。</p>
+<p>Realization of a Stochastic Process 实现随机过程</p>
+<p>集合的样本函数 x(t,s) 称为过程的实现。</p>
+<blockquote>
+<p>下图展示了一组与全球不同城市气温相对应的波形。这是一组时间函数或随机过程。任何特定城市的气温波形都是随机过程的一次实现或样本函数。</p>
+<p><img alt="alt text" src="../image-9.png" /></p>
+</blockquote>
+<p>Statistical (ensemble) averages 统计（集合）平均值</p>
+<p>考虑在时间瞬间 t =ti 时采样的连续随机过程 X(t)，则 Xti =X(ti) 是一个随机变量，其相应的 p.d.f. 为 f (xti)，r.v.的第 m 个矩取为</p>
+<p><img alt="alt text" src="../image-10.png" /></p>
+<blockquote>
+<p><img alt="alt text" src="../image-11.png" /></p>
+</blockquote>
+<p>Correlation 相关性</p>
+<p>考虑两个随机变量 Xt1，Xt2，其中 Xti = X(ti)，i = 1，2。Xt1 和 Xt2 之间的统计（集合）相关性由联合矩给出。</p>
+<p><img alt="alt text" src="../image-12.png" /></p>
+<p>它取决于时间时刻 t1、t2，称为随机过程的自相关性 autocorrelation。</p>
+<p>Autocovariance 自方差</p>
+<p>自方差函数的定义是 </p>
+<p><img alt="alt text" src="../image-13.png" /></p>
+<p>其中 µX(ti) = E[Xti],i = 1,2.</p>
+<p>Statistical (ensemble) averages for joint random processes 联合随机过程的统计（集合）平均值</p>
+<p>两个过程 X(t) 和 Y(t) 的交叉相关函数cross-correlation function由联合矩定义</p>
+<p><img alt="alt text" src="../image-14.png" /></p>
+<p>Cross-covariance 交叉方差</p>
+<p>两个过程 X(t) 和 Y(t) 的交叉协方差函数定义为 cXY(t1,t2) = γXY(t1,t2)-µX(t1)µY(t2) (28) 其中 µX(t1) = E[Xt1 ]，µY(t2) = E[Yt2 ]。</p>
+<blockquote>
+<p>如果 cXY(t1,t2) = 0，则 X(t) 和 Y(t) 互不相关；如果 E[Xt1 Yt2 ] = 0，则 X(t) 和 Y(t) 在统计上是正交的 statistically orthogonal。独立一定不相关，但反之不一定成立</p>
+</blockquote>
+<p>Stationary stochastic process 静态随机过程</p>
+<p>对于所有 τ 和所有 n，如果两组随机变量的联合概率密度函数相等，即 f (xt1 ,xt2 ,......xtn ) = f (xt1+τ,xt2+τ,.....xtn+τ) ，则随机过程是静止的。</p>
+<p>Auto-correlation, auto-covariance, cross-correlation of stationary processes 静止过程的自相关、自协方差、交叉相关</p>
+<p>自相关函数和自协方差函数取决于时间差 t1 -t2 = τ，即</p>
+<p><img alt="alt text" src="../image-15.png" /></p>
+<p>而两个共同且单独静止过程的交叉相关分别为</p>
+<p><img alt="alt text" src="../image-16.png" /></p>
+<p>Wide-sense or weakly stationary random process广义或弱静态随机过程</p>
+<p>如果一个过程的均值和方差都是有限且恒定的，并且其自相关函数只取决于样本出现的时间差或滞后时间，那么这个过程就是广义或弱静止的。</p>
+<p><img alt="alt text" src="../image-17.png" /></p>
+<p>练习：</p>
+<p><img alt="alt text" src="../image-20.png" /></p>
+<p><img alt="alt text" src="../image-18.png" /></p>
+<p><img alt="alt text" src="../image-19.png" /></p>
+<p>Ergodicity 遍历性</p>
+<p>如果从单一样本函数或单一实现得到的时间平均值等于统计（集合）平均值，且概率为 1，则随机过程具有遍历性 ergodic</p>
+<p>Discrete-time random signals 离散时间随机信号</p>
+<p>离散时间随机信号 X[n] 可以通过对连续时间随机信号 X(t) 进行均匀采样得到，因此可以得出类似的统计特性</p>
+<p>White noise/sequences白色噪音/序列</p>
+<p>白序列 w[n] 被定义为不相关的随机变量，其均值 µW =0，方差为 σ2 W。</p>
+<p>如果自协方差由下式给出，则广义平稳过程 W[n] 称为白过程</p>
+<p><img alt="alt text" src="../image-21.png" /></p>
+<p>Discrete ergodic random signal statistics 离散遍历随机信号统计</p>
+<p>下表总结了离散时间遍历随机过程的统计特性</p>
+<p><img alt="alt text" src="../image-22.png" /></p>
+<p>练习：</p>
+<p><img alt="alt text" src="../image-23.png" /></p>
+<p><img alt="alt text" src="../image-24.png" /></p>
+<h3 id="power-density-spectrum">Power density spectrum 功率密度频谱</h3>
+<p>静止随机过程是一个无限能量信号，因此不存在傅里叶变换。相反，随机过程的功率密度谱给出了随机过程的频谱特征，它被定义为自相关函数 γxx(τ)的傅里叶变换</p>
+<p><img alt="alt text" src="../image-25.png" /></p>
+<p>反傅里叶变换的计算公式为</p>
+<p><img alt="alt text" src="../image-26.png" /></p>
+<p>由于 E[X2 t ] = γxx(0)代表随机过程的平均功率，即 Γxx(F)下的面积，因此 Γxx(F)是功率作为频率函数的分布情况</p>
+<p>Cross-power density spectrum 交叉功率密度谱</p>
+<p>考虑两个联合静止随机过程 X(t) 和 Y(t) 具有交叉相关性 γXY (τ) ，则交叉功率密度谱定义为 γXY(τ) 的傅立叶变换</p>
+<p><img alt="alt text" src="../image-27.png" /></p>
+<p>Power density spectrum of discrete random processes 离散随机过程的功率密度谱</p>
+<p>离散随机过程 X[n] 的功率密度谱为</p>
+<p><img alt="alt text" src="../image-28.png" /></p>
+<p><img alt="alt text" src="../image-29.png" /></p>
+<p>练习：</p>
+<p><img alt="alt text" src="../image-30.png" /></p>
+<p><img alt="alt text" src="../image-31.png" /></p>
+<h3 id="innovations-representation-of-a-stationary-random-process">Innovations representation of a stationary random process 静态随机过程的创新表示</h3>
+<p>在这里，我们将证明广义静态随机过程 x[n] 可以表示为由白噪声过程 w[n] 激发的因果可逆线性系统 H(z) 的输出。</p>
+<p><img alt="alt text" src="../image-32.png" /></p>
+<p>反过来，如果反因果滤波器的输入是广义静态随机过程 x[n]，那么输出就是白噪声过程 w[n] 。</p>
+<p><img alt="alt text" src="../image-33.png" /></p>
+<blockquote>
+<p>1/H(z) is the noise whitening filter and w[n] is the innovations process associated with the stationary random process x[n].</p>
+<p>证明过程：</p>
+<p><img alt="alt text" src="../image-34.png" /></p>
+</blockquote>
+<p>Rational power spectra 有理功率谱</p>
+<p>假设弱静态随机过程 x[n] 的功率谱密度是一个有理函数</p>
+<p><img alt="alt text" src="../image-35.png" /></p>
+<p>其中 B(z) 和 A(z) 的根都在 z 平面的单位圆内。那么从 w[n] 生成 x[n] 的线性滤波器的计算公式为</p>
+<p><img alt="alt text" src="../image-36.png" /></p>
+<p>其中，{bk}和{ak}分别是决定 H（z）零点和极点位置的滤波器系数</p>
+<p>因此，H(z) 是因果、稳定和最小相位线性系统，1/H(z) 也是因果、稳定和最小相位线性系统。因此，随机过程 x[n] 唯一地代表了创新过程 w[n] 的统计特性，反之亦然。</p>
+<p>考虑一个稳定的实线性时变系统 H(z)。其输入 w(n) 是一个一般的广义静止过程（不一定是白色的），具有自相关函数 γww[m] 和 Z 变换 Γww(z)。那么它的输出 x(n) 也是一个广义静止过程，具有自相关函数 γxx[m]和 Z 变换 Γxx(z)。我们有</p>
+<p><img alt="alt text" src="../image-37.png" /></p>
+<p>然后，我们可以得到功率密度频谱如下:</p>
+<p><img alt="alt text" src="../image-38.png" /></p>
+<p>练习：</p>
+<p><img alt="alt text" src="../image-39.png" /></p>
+<p><img alt="alt text" src="../image-40.png" /></p>
+<p><img alt="alt text" src="../image-41.png" /></p>
+<p>对于公式 (61) 中由 H(z) 定义的线性系统，输出 x[n] 与输入 w[n] 的关系为</p>
+<p><img alt="alt text" src="../image-42.png" /></p>
+<p>Autoregressive (AR(p)) process 自回归过程</p>
+<p>设 b0 =1，bk =0，k &gt;0，则线性滤波器</p>
+<p>H(z)=1/A(z)</p>
+<p>是一个全极性滤波器，其输入输出关系为</p>
+<p><img alt="alt text" src="../image-43.png" /></p>
+<p>因此，用于产生创新值的消噪滤波器 (1/H(z)) 是一个全零滤波器</p>
+<p>Moving average (MA(q)) process 移动平均过程</p>
+<p>设 ak =0，k ≥1，则线性滤波器</p>
+<p>H(z) =B(z)</p>
+<p>是全零滤波器，输入输出关系为</p>
+<p><img alt="alt text" src="../image-44.png" /></p>
+<p>因此，MA 过程的噪声消除滤波器 (1/H(z)) 是一个全极滤波器</p>
+<p>Autroregressive and moving average (ARMA(p,q)) process 自回归移动平均过程</p>
+<p>考虑在 Z 平面上具有有限个零点和极点的线性滤波器</p>
+<p>H(z) = B(z)/A(z)</p>
+<p>那么相应的差分方程为</p>
+<p><img alt="alt text" src="../image-45.png" /></p>
+<p>因此，用于从 x[n] 生成创新过程 w[n] 的消噪滤波器 1/H(z) = A(z)/B(z) 是一个极点为零的滤波器。</p>
+<p>Relationships between filter parameters and autocorrelation sequence</p>
+<p>滤波器参数与自相关序列之间的关系</p>
+<p><img alt="alt text" src="../image-46.png" /></p>
+<blockquote>
+<p><img alt="alt text" src="../image-47.png" /></p>
+</blockquote>
+<p>练习：</p>
+<p><img alt="alt text" src="../image-48.png" /></p>
+<p>有讲解，记得看</p>
+<h2 id="linear-prediction-and-optimum-linear-filters">Linear prediction and optimum linear filters 线性预测和最佳线性滤波器</h2>
+<p>在设计通信系统、控制系统和地球物理时，需要设计滤波器来进行信号估计。需要从统计学角度看最佳滤波器设计。这里我们考虑：</p>
+<p>线性滤波器</p>
+<p>“最佳" ↔ 均方误差最小化 （MSE）</p>
+<p>静止过程的二阶统计（自相关和互相关）。</p>
+<p>Forward linear prediction 前向预测</p>
+<p>设 x[n] 为静止随机过程。</p>
+<p>问题：如何通过观察静止随机过程的过去值来预测该过程的未来值？阶次为 p 的一步正向线性预测器 ˆ x[n]，通过过去值 x[n-1],x[n-2],---,x[n-p]的加权线性组合来预测 x[n] 的值。其定义为</p>
+<p><img alt="alt text" src="../image-49.png" /></p>
+<p>其中，{-ap[k]}p k=1 是线性组合中的权重，称为阶数为 p 的一步前向线性预测器的预测系数。</p>
+<blockquote>
+<p>例：取 p =3，设 n =0。给定 x[-3],x[-2],x[-1]，我们希望找到 ap[k],k = 1,2,3，使得 ˆ x[0] = -ap[1]x[-1]-ap[2]x[-2]-ap[3]x[-3] 是 x[0] 的前向线性预测器。</p>
+</blockquote>
+<p>x[n] 的预测值 x[n] 与 ˆ x[n] 之间的差值称为前向预测误差 forward prediction error</p>
+<p>当ap[0]=1时，</p>
+<p><img alt="alt text" src="../image-50.png" /></p>
+<p>Prediction-error filter 预测误差过滤器</p>
+<p>线性预测等同于线性滤波，预测器嵌入在线性滤波器中</p>
+<p><img alt="alt text" src="../image-51.png" /></p>
+<p>其中，{x[n]} 为输入序列，{fp[n]} 为输出序列。</p>
+<p>下图所示的直接形式 FIR 滤波器是预测滤波器的等效实现</p>
+<p><img alt="alt text" src="../image-52.png" /></p>
+<p>fp[n] 的 Z 变换如下</p>
+<p><img alt="alt text" src="../image-53.png" /></p>
+<p>Mean-square forward linear prediction error前向线性预测均方误差</p>
+<p>前向线性预测误差 fp[n] 的均方值为</p>
+<p><img alt="alt text" src="../image-54.png" /></p>
+<p>Ef p 是预测系数 ap[k] 的二次函数。</p>
+<p>Minimum mean-square prediction error最小均方预测误差</p>
+<p>Ef p 的最小化会导致以下线性方程组</p>
+<p><img alt="alt text" src="../image-55.png" /></p>
+<p>称为线性预测因子系数的正态方程。最小均方预测误差简单来说就是</p>
+<p><img alt="alt text" src="../image-56.png" /></p>
+<p>直接形式 FIR 滤波器等效于下图所示的全零网格滤波器：</p>
+<p><img alt="alt text" src="../image-57.png" /></p>
+<p>网格滤波器一般由以下一组阶递归方程描述</p>
+<p><img alt="alt text" src="../image-58.png" /></p>
+<p>其中 {Km} 称为反射系数或部分系数。</p>
+<p>网格参数集 Km 与 A(z) 的系数集 al 是一一映射的。</p>
+<p><img alt="alt text" src="../image-59.png" /></p>
+<p>在下文中，为了简化讨论，我们假设所有系数 {Km}、{al} 都是实数。</p>
+<p>{Km} ⇒ {al}</p>
+<p>在 A0(z) =1 时，计算</p>
+<p><img alt="alt text" src="../image-60.png" /></p>
+<p>最后阶段的结果是</p>
+<p><img alt="alt text" src="../image-61.png" /></p>
+<p>然后，我们得到 aP(1),...,aP(P)。</p>
+<p>{al} ⇒ {Km}</p>
+<p>AP(z) =A(z) 和 KP =aP. 那么</p>
+<p><img alt="alt text" src="../image-62.png" /></p>
+<p><img alt="alt text" src="../image-63.png" /></p>
+<blockquote>
+<p>例：P =3：K1 =1/4，K2 =1/2，K3 =1/3，均为实数。在 A0(z) =1 时，我们有</p>
+<p><img alt="alt text" src="../image-64.png" /></p>
+</blockquote>
+<p><img alt="alt text" src="../image-65.png" /></p>
+<blockquote>
+<p>例如，给定传递函数描述的 FIR 滤波器：</p>
+<p><img alt="alt text" src="../image-66.png" /></p>
+<p>相应的反射系数 {Km} 如下所示</p>
+<p><img alt="alt text" src="../image-67.png" /></p>
+<p><img alt="alt text" src="../image-68.png" /></p>
+</blockquote>
+<p>晶格结构 Lattice structures在数字信号处理中应用广泛。其中一个显著的特性是，在 |Km| &lt;1, ∀ m情况下，A(z) 的零点都在|z| = 1 内</p>
+<p>Backward linear prediction 后向线性预测</p>
+<p>假设数据序列 x[n]、x[n-1]......、x[n-(p-1)]是从静态随机过程中得到的。问题:如何通过观察过程过去的值来预测 x[n-p] 的值？</p>
+<p>阶次为 p 的一步后向线性预测器 ˆ x[n-p]，通过过去值 x[n],x[n-1],---,x[n-(p-1)]的加权线性组合来预测 x[n-p] 的值。其定义如下</p>
+<p><img alt="alt text" src="../image-69.png" /></p>
+<p>其中，{-bp[k]}p-1 k=0 称为阶数为 p 的一步后向线性预测器的预测系数 prediction coefficients。</p>
+<blockquote>
+<p>例：取 p =3，设 n =0。给定 x[-2],x[-1],x[0]，我们希望找到 bp[k],k = 0,1,2，使得 ˆ x[-3] =-bp[0]x[0]-bp[1]x[-1]-bp[2]x[-2] 是 x[-3] 的后向线性预测器。</p>
+</blockquote>
+<p>Backward prediction error 后向预测误差</p>
+<p>值 x[n-p] 与 x[n-p] 的预测值 ˆ x[n-p] 之间的差值称为后向预测误差：</p>
+<p><img alt="alt text" src="../image-70.png" /></p>
+<p>在 z 域：</p>
+<p><img alt="alt text" src="../image-71.png" /></p>
+<p>后向线性预测器的加权系数是前向线性预测器系数的复共轭系数，但顺序相反，即</p>
+<p>bp[k] = a∗p[p−k],k = 0,1,...,p</p>
+<p>因此，</p>
+<p><img alt="alt text" src="../image-72.png" /></p>
+<p>这意味着系统函数 Bp(z) 的 FIR 滤波器的零点是 Ap(z) 零点的共轭倒数。Bp(z) 被称为 Ap(z) 的倒数或反向多项式。</p>
+<p>Minimum mean-square backward linear prediction error 最小均方反向线性预测误差</p>
+<p>后向线性预测误差 gp[n] 的均方值为</p>
+<p><img alt="alt text" src="../image-73.png" /></p>
+<p>其中</p>
+<p><img alt="alt text" src="../image-74.png" /></p>
+<p>需要注意的是，Eg p 是预测系数 ap[k] 的二次函数，Eg p 的最小化与公式 (87) 中给出的线性方程组相同。最小均方反向线性预测误差为</p>
+<p><img alt="alt text" src="../image-75.png" /></p>
+<p>Relationship of an AR process to linear prediction AR 过程与线性预测的关系</p>
+<p>在AR（p）过程中，自相关序列与参数的关系如下：</p>
+<p><img alt="alt text" src="../image-76.png" /></p>
+<p>这就是所谓的 “尤勒-瓦尔克条件 eYule-Walker equations”或 “矩阵形式”</p>
+<p><img alt="alt text" src="../image-77.png" /></p>
+<p>其中，σ2 w 是白噪声过程的方差</p>
+<p><img alt="alt text" src="../image-78.png" /></p>
+<p>注意，如果基础过程 x[n] 是 AR(p)，那么 AR(p)过程的参数 {ak} 正是第 p 阶预测器的预测系数 ap[k]，即比较公式 (101) 和公式 (87) 中的正态方程。</p>
+<p>第 p 阶预测器的最小均方误差（MMSE）等于白噪声过程的方差，即 εf p = σ2 w。 </p>
+<p>因此，具有系统函数 Ap(z) 的预测误差滤波器是一个噪声白化滤波器，它产生创新过程 w[n]。</p>
+<p>Solution of the normal equations正常方程的解法</p>
+<p>下面是正常方程的紧凑形式</p>
+<p><img alt="alt text" src="../image-79.png" /></p>
+<p>ap(0)=1。得到的 MMSE 由式 (88) 给出，上式可以用下面一组增强正态方程表示</p>
+<p><img alt="alt text" src="../image-80.png" /></p>
+<p>前向预测误差均方值的最小化归结为预测系数的正态方程求解。</p>
+<p>Matrix form of augmented normal equations 增强正则方程的矩阵形式</p>
+<p>假设 p =3，则公式 (105) 变为</p>
+<p><img alt="alt text" src="../image-81.png" /></p>
+<p>或矩阵形式</p>
+<p><img alt="alt text" src="../image-82.png" /></p>
+<p>其中 γxx[−m] =γxx[m]</p>
+<p>注意自相关矩阵的 Toeplitz1 对称性。</p>
+<p>两种计算效率较高的迭代求解方法是</p>
+<p>列文森-杜宾算法 Levinson-Durbin algorithm： 该算法由 Levinson 于 1947 年提出，Durbin 于 1959 年对其进行了修改，适用于串行处理，计算复杂度为 O(p2)。</p>
+<p>舒尔算法 Schur Algorithm： 该算法是 1917 年舒尔提出的，计算反射系数2 的时间为 O(p2)，但如果使用并行处理器，计算时间可达到 O(p)。</p>
+<p>这两种算法都利用了自相关矩阵的托普利兹对称特性。</p>
+<p>Levinson-Durbin algorithm列文森-杜宾算法</p>
+<p>该方法从 p = 1 阶的预测器开始，然后递增阶数，利用低阶解来获得下一个高阶的解</p>
+<p><img alt="alt text" src="../image-83.png" /></p>
+<p><img alt="alt text" src="../image-84.png" /></p>
+<p>Wiener filter for Filtering and Prediction 用于过滤和预测的维纳滤波器</p>
+<p>考虑输入信号 x[n] = s[n]+w[n]，其中 s[n] 是期望信号，w[n] 是不期望的噪声或干扰。问题：设计一个线性滤波器 H(z)，在保持所需信号 s[n] 特性的同时，消除或滤除不需要的噪声或干扰，使滤波器的输出 y(n) 近似于某个指定（参考）的所需信号 d(n)。</p>
+<p><img alt="alt text" src="../image-85.png" /></p>
+<p>Three types of linear estimation problems三类线性估计问题</p>
+<p>线性估计问题被称为：</p>
+<p>如果参考信号 d[n] = s[n]，即设计 H(z) 以抑制 w[n] 和 y[n]≈s[n]，则进行信号滤波。 filtering</p>
+<p>如果参考信号 d[n] = s[n+D],D&gt;0，则进行信号预测 signal prediction。请注意，这与之前考虑的线性预测（d[n] = x[n+D],D&gt;0）相关，但更为一般。</p>
+<p>如果参考信号 d[n] = s[n-D],D&gt;0，则信号平滑 signal smoothing。</p>
+<p>在下文中，我们假设 s[n]、w[n]、d[n] 均值为零、 是广义静止的。</p>
+<p>Wiener filter维纳滤波器</p>
+<p>最佳线性滤波器 h[n] 被称为最小均方误差意义上的维纳滤波器</p>
+<p><img alt="alt text" src="../image-86.png" /></p>
+<p>其中，Eh M =E |e[n]|2，e[n] =d[n]-y[n] 。 </p>
+<p>维纳滤波器可以设计为 FIR 或 IIR。对于 IIR 滤波器，假定输入数据 x[n] 在无限的过去都是可用的。</p>
+<p>Designing FIR Wiener filters设计 FIR 维纳滤波器</p>
+<p>假设滤波器的长度为 M，系数为 {h[k]}M-1 那么输出 y[n] 取决于有限数据集 x[n]、x[n-1]......、x[n-(M-1)]、</p>
+<p><img alt="alt text" src="../image-87.png" /></p>
+<p>最优的维纳 FIR 滤波器是通过最小化预期输出 d[n] 和 y[n] 之间误差的均方值来实现的，即</p>
+<p><img alt="alt text" src="../image-88.png" /></p>
+<p>Wiener-Hopf Equation维纳-霍普夫方程</p>
+<p>由于公式 (115) 是滤波器系数 h=h[0],h[1],...h[M -1] t 的二次函数，因此 Eh M 的最小化可归结为求解线性方程组</p>
+<p><img alt="alt text" src="../image-89.png" /></p>
+<p>其中，γxx[l] 是输入序列 x[n] 的自相关，γdx[l] 是期望序列 d[n] 与输入序列 x[n] 之间的交叉相关，n = 0,..., M -1 。式 (116) 被称为维纳-霍普夫方程，相当于线性预测中的正则方程</p>
+<p>Matrix form of the Wiener-Hopf equation维纳-霍普夫方程的矩阵形式</p>
+<p>式 (116) 可以矩阵形式写成
+ΓMhM =γd</p>
+<p>其中，ΓM 是元素为 Γlk = γxx[l-k]的 M×M（赫米特）托普利兹矩阵，γd 是元素为 γdx[l]的 M×1 交叉相关向量，l =0,1,...,M-1。</p>
+<p>因此，最佳滤波器系数为 hopt = Γ-1 M γd，使用维纳滤波器得到的 MSE 为</p>
+<p><img alt="alt text" src="../image-90.png" /></p>
+<p>Wiener-Hopf equations for filtering用于滤波的维纳-霍普夫方程</p>
+<p>其中，σ2 d = E |d[n]|2。</p>
+<p>如果我们考虑过滤 d[n] = s[n]的问题，并进一步假设 s[n] 和 w[n] 是不相关的随机序列，即</p>
+<p><img alt="alt text" src="../image-91.png" /></p>
+<p>已知γss[k]、γww[k]，则维纳-霍普夫方程或正则方程为</p>
+<p><img alt="alt text" src="../image-92.png" /></p>
+<p>如果我们考虑预测问题 d[n] = s[n+D],D&gt;0，并进一步假设 s[n] 和 w[n] 是不相关的随机序列，即</p>
+<p><img alt="alt text" src="../image-93.png" /></p>
+<p>已知γss[k]、γww[k]，则预测滤波器的维纳-霍普夫方程为</p>
+<p><img alt="alt text" src="../image-94.png" /></p>
+<p>需要注意的是，需要反演的相关矩阵是托普利兹矩阵，可以使用 Levinson-Durbin 算法求解最佳滤波器系数。</p>
+<p>Example: FIR Wiener filter design范例： FIR 维纳滤波器设计</p>
+<p><img alt="alt text" src="../image-95.png" /></p>
+<p><img alt="alt text" src="../image-96.png" /></p>
+<p>Orthogonality principle in linear mean-square estimation线性均方估计中的正交原则</p>
+<p>设 v0、v1、v2 为三个给定向量，c1、c2 为两个标量，则</p>
+<p>^v0 = c1v1+c2v2.</p>
+<p>对于 c1、c2 的哪个值，ve = v0-^v0 的距离最小？</p>
+<p>众所周知，当选择 c1 和 c2 时，ve 与 v1 和 v2 正交（即垂直），距离最小。</p>
+<p>考虑滤波器的输出，即估计值</p>
+<p><img alt="alt text" src="../image-97.png" /></p>
+<p>是数据所跨子空间中的一个向量</p>
+<p>x[n−k],k =0,1,··· ,M−1.</p>
+<p>估计误差 e[n] = d[n]-ˆ d[n]是一个从 d[n] 到 ˆ d[n] 的矢量（见图 10），正交原则指出，当 h[k] 的选择使得误差与估计中的每个数据点正交时，均方误差 Eh M 将最小化</p>
+<p>E[e[n]x[n−k]] = 0,k = 0,1,2,··· ,M −1</p>
+<p>因此，最小 MSE 为</p>
+<p><img alt="alt text" src="../image-98.png" /></p>
+<p>当且仅当式 (117) 中的Γxx 是非奇异值时，最佳 FIR Wiener 滤波器或 Wiener-Hopf 方程的解才是唯一的。</p>
+<p>Geometric interpretation of the linear MSE problem 线性 MSE 问题的几何解释</p>
+<p><img alt="alt text" src="../image-99.png" /></p>
+<p>IIR Wiener filter IIR 维纳滤波器</p>
+<p>当 M 变为无穷大时，FIR 滤波器 H(z) 变为 IIR 因果滤波器</p>
+<p><img alt="alt text" src="../image-100.png" /></p>
+<p>那么误差 e(n) = d(n)-ˆ d(n) 的均方值为</p>
+<p><img alt="alt text" src="../image-101.png" /></p>
+<p>是 H(z) 的单位脉冲响应 {h[k]} 的二次函数</p>
+<p>应用正交原则，即 E[e[n]x[n-m]] = 0，∀m ≥ 0，可得出以下维纳-霍普夫方程：</p>
+<p><img alt="alt text" src="../image-102.png" /></p>
+<p>以 hopt[k] 作为解，相应的最小 MSE 为</p>
+<p><img alt="alt text" src="../image-103.png" /></p>
+<p>注意到 (139) 仅在 m &gt; 0 时成立，因此维纳-霍普夫方程无法直接通过 Z 变换得到</p>
+<p><img alt="alt text" src="../image-104.png" /></p>
+<p>回顾：静态随机过程 x[n] 可以用方差为 σ2 ˜ w = 1 的创新过程（白序列）激励的最小相位系统 G(z) 的输出来表示，其中 G(z) 可以从 Γxx(z)（γxx[m]的 z 变换）的谱因式分解中获得</p>
+<p><img alt="alt text" src="../image-105.png" /></p>
+<p><img alt="alt text" src="../image-106.png" /></p>
+<p>Example: IIR Wiener filter design范例： IIR Wiener 滤波器设计</p>
+<p><img alt="alt text" src="../image-107.png" /></p>
+<p><img alt="alt text" src="../image-108.png" /></p>
+<p><img alt="alt text" src="../image-109.png" />
+证明在课程中</p>
+<h2 id="power-spectrum-estimation">Power spectrum estimation</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2024 <a herf='https://github.com/suliangzai/Note'>Suliangzai</a>. All rights reserved.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/suliangzai" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1M480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2m-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3m-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/suliangzai/Note" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/suliangzai/Note" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141m0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7m146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8m76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8M398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/suliangzai/Note" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M248 8C111.033 8 0 119.033 0 256s111.033 248 248 248 248-111.033 248-248S384.967 8 248 8m114.952 168.66c-3.732 39.215-19.881 134.378-28.1 178.3-3.476 18.584-10.322 24.816-16.948 25.425-14.4 1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25 5.342-39.5 3.652-3.793 67.107-61.51 68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608 69.142-14.845 10.194-26.894 9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7 18.45-13.7 108.446-47.248 144.628-62.3c68.872-28.647 83.183-33.623 92.511-33.789 2.052-.034 6.639.474 9.61 2.885a10.45 10.45 0 0 1 3.53 6.716 43.8 43.8 0 0 1 .417 9.769"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/suliangzai/Note" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154m-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4m-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2M563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4m-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6m107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/suliangzai/Note" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M433.754 420.445c-11.526 1.393-44.86-52.741-44.86-52.741 0 31.345-16.136 72.247-51.051 101.786 16.842 5.192 54.843 19.167 45.803 34.421-7.316 12.343-125.51 7.881-159.632 4.037-34.122 3.844-152.316 8.306-159.632-4.037-9.045-15.25 28.918-29.214 45.783-34.415-34.92-29.539-51.059-70.445-51.059-101.792 0 0-33.334 54.134-44.859 52.741-5.37-.65-12.424-29.644 9.347-99.704 10.261-33.024 21.995-60.478 40.144-105.779C60.683 98.063 108.982.006 224 0c113.737.006 163.156 96.133 160.264 214.963 18.118 45.223 29.912 72.85 40.144 105.778 21.768 70.06 14.716 99.053 9.346 99.704"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.5090c770.min.js"></script>
+      
+    
+  </body>
+</html>
