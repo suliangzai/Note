@@ -476,3 +476,763 @@ Topic Modeling:
 Vector Dimensionality Reduction:
 ▪ Vector dimensionality reduction simplifies high-dimensional data representations, improving computational efficiency and interpretability while retaining essential information.矢量降维简化了高维数据表示，提高了计算效率和可解释性，同时保留了基本信息。
 ▪ Transforms data into lower-dimensional spaces, aiding in visualisation, noise reduction, and data analysis.将数据转换到低维空间，有助于可视化、降噪和数据分析。
+
+# Week 4
+
+## Text Classification文本分类
+
+Text classification tasks involve the labelling and classification of texts into various categories.文本分类任务涉及将文本标记和分类为不同类别。
+
+These categories can include:
+- Topics:
+Topic Modelling aims to classify text into its various topics based on the contents of the text.主题建模旨在根据文本内容将文本分为不同的主题。
+- Sentiment:
+Sentiment analysis analyses general sentiment towards a company, person or product.情感分析分析对公司、个人或产品的一般情感。
+Often applied on market research and reputation management tasks.常用于市场研究和声誉管理任务。
+- Languages:
+Language identification can be particularly useful in processing search engine queries.语言识别在处理搜索引擎查询时特别有用
+- Authors:
+Commonly used in forensics and cybersecurity.常用于取证和网络安全
+
+Traditional ML classifiers aim to implement a generic algorithm to generate a trained model using a labelled training set.传统的 ML 分类器旨在实施一种通用算法，利用带标签的训练集生成一个训练有素的模型。
+
+The classifier learns the characteristics of each label from the training data to assign labels to new data.分类器从训练数据中学习每个标签的特征，从而为新数据分配标签。
+
+Text Classifiers generally feature:文本分类器一般具有以下特点：
+
+Input:
+- A document, 𝒅
+- A predefined set of classes {𝒄𝟏, 𝒄𝟐, 𝒄𝟑 … 𝒄𝒋}预定义的类
+
+Output:
+- A predicted class 𝒄 ∈ 𝑪
+
+Text classification can be achieved through:文本分类可通过以下方法实现
+
+Rule based classifiers基于规则的分类器
+
+ML models:ML 模型
+- Naïve-Bayes
+- Support Vector Machines (SVM)
+- Extreme Learning Machines (ELM)
+- Gaussian Processes
+- Linear Regression
+
+### Naïve Bayes
+
+Naïve Bayes models for text classification take a BOW approach to text classification.用于文本分类的奈夫贝叶斯模型采用 BOW 方法进行文本分类。
+
+Using the Bayes Theorem, for a document d and class c:使用贝叶斯定理，对于文档 d 和类别 c：
+
+\[
+    P(c|d)=\frac{P(d|c)P(c)}{P(d)}
+\]
+
+The most likely class 𝑐𝑐 is given by:最可能的类别 𝑐𝑐 由以下公式给出：
+
+![alt text](image-31.png)
+
+1. 最有可能的类别是文档 d 中概率最高的类别
+2. 使用贝叶斯定理
+3. 去分母
+4. 其中，x1 ... xn 是文档特征。
+5. 单词概率相互独立的 “天真 ”假设。
+
+Using maximum likelihood estimators from the training corpus:使用训练语料库中的最大似然估计值：
+
+Class Prior Probabilities:类别先验概率：
+
+\[
+    P(c)=\frac{count(docs labelled c)}{count(total docs)}
+\]
+
+Conditional Probabilities:条件概率
+
+\[
+    P(w_i|c)=\frac{count(docs with w_i labelled c)}{count(docs labelled c)}
+\]
+
+Zero Probability Problem
+
+Imagine the following scenario:
+
+ If we were trying to classify reviews into classes ‘positive’ and ‘negative’ and run across the word “excellent” in ‘review1’, which does not appear in any other positive reviews. 如果我们试图将评论分为 “正面 ”和 “负面 ”两类，并在 “review1 ”中发现了 “excellent”（“极好”）一词，而这个词并没有出现在其他任何正面评论中。
+
+\[
+    P(positive|review1) = 0
+\]
+
+because
+
+\[
+    P(excellent|positive) = 0
+\]
+
+These zero probabilities cannot be conditioned away no matter the evidence.无论证据如何，这些零概率都是无法消除的。
+
+To avoid this issue, we introduce Laplace (or Add-One smoothing)为了避免这个问题，我们引入了拉普拉斯平滑法（或加一平滑法）
+
+![alt text](image-32.png)
+
+其中，V 是词汇量的大小
+
+![alt text](image-33.png)
+
+Data Preprocessing
+
+Use RegEx to remove punctuation and special characters, convert all characters to lowercase.使用 RegEx 删除标点符号和特殊字符，将所有字符转换为小写。
+
+Apply POS tagging and lemmatise input words 应用 POS 标记并对输入词进行词素化处理
+
+Remove stop-words.删除停止词
+
+Apply TF-IDF vectorisation.应用 TF-IDF 矢量化。
+
+![alt text](image-34.png)
+
+### Support Vector Machines
+
+Support Vector Machines adopt a graphical approach to classifying data.支持向量机采用图形方法对数据进行分类。
+
+SVMs aim to find hyperplanes that best separates data points of different classes in a high-dimensional space.SVM 的目标是在高维空间中找到最能分隔不同类别数据点的超平面。
+
+SVMs select the hyperplane for which the closest points from the dataset are the farthest.SVM 选择与数据集最近的点距离最远的超平面。
+
+![alt text](image-35.png)
+
+SVMs aim to maximise the margin between the hyperplanes and closest points from the dataset.SVM 的目标是最大化超平面与数据集最近点之间的边际。
+
+To apply SVM in the context of NLP, the textual data need to be first represented as vectors. 要在 NLP 中应用 SVM，首先需要将文本数据表示为向量
+
+- One of the most popular ways is to use TF-IDF vectorisation.最流行的方法之一是使用 TF-IDF 向量化。
+- The equation of a hyperplane can be given by 超平面的方程可由 𝒘·x + b = 𝟎
+- The distance between a point x to a hyperplane is 点 x 到超平面的距离为 $\frac{|wx+b|}{||w||^2}$
+- The SVM algorithm aims to maximise this quantity by minimising the value of $||w||^2$ SVM 算法旨在通过最小化值来最大化这一数量。
+- This is known as the ‘primal’ problem of SVMs.这就是 SVM 的 “基元 ”问题。
+
+To optimise the SVM model, we employ a hinge loss function:为了优化 SVM 模型，我们采用了铰链损失函数：
+
+![alt text](image-36.png)
+
+- If the predicted value and the actual value are of the same sign, the cost is 0.如果预测值和实际值符号相同，则成本为 0。
+- If not, we calculate the loss value.如果不是，我们就计算损失值。
+- A regularisation function, 𝑪 ∗ ||𝒘|| 𝟐 is often added to discourage the model from fitting the training data too closely and overfitting.正则化函数通常用来阻止模型过于拟合训练数据和过度拟合。
+
+In many real-life scenarios including text processing, the data in the input space of an SVM may not be linearly separable, posing a challenge for SVMs to find a hyperplane to cut the data.在包括文本处理在内的许多实际应用场景中，SVM 输入空间中的数据可能不是线性可分离的，这就给 SVM 寻找超平面来切割数据带来了挑战。
+
+The kernel trick addresses this limitation by mapping the data into a higher-dimensional feature space where it becomes linearly separable.核技巧通过将数据映射到更高维度的特征空间来解决这一限制，在该空间中，数据变得线性可分。
+
+Instead of explicitly calculating the coordinates of data points in the higher-dimensional space, we compute the dot products between the data points in this space without ever computing the transformation explicitly.我们不需要明确计算高维空间中数据点的坐标，而是计算该空间中数据点之间的点积，而无需明确计算变换。
+
+![alt text](image-37.png)
+
+The most commonly used kernels include:最常用的内核包括
+
+![alt text](image-38.png)
+
+![alt text](image-39.png)
+
+![alt text](image-40.png)
+
+### Extreme Learning Machines (ELMs)
+
+ELMs are shallow feedforward neural networks that feature a single hidden layer.ELM 是浅层前馈神经网络，只有一个隐藏层。
+
+Unlike traditional neural networks, ELMs do not feature a backpropagation step.与传统神经网络不同，ELM 没有反向传播步骤。
+
+![alt text](image-41.png)
+
+In ELMs, the weights between the input layer and the hidden layers are randomly initialized and not updated during training.在 ELM 中，输入层和隐藏层之间的权重是随机初始化的，在训练过程中不会更新。
+
+The weights between the hidden layer and the output layer form a beta-matrix as shown below.隐藏层和输出层之间的权重构成一个贝塔矩阵，如下图所示。
+
+![alt text](image-42.png)
+
+
+An ELM aims to find this matrix 𝛽 such that the error between the actual outputs (given by 𝐻·𝛽) and the target outputs (given by 𝑦) is minimised.ELM 的目标是找到这样一个矩阵 𝛽，使实际输出（由𝐻𝑦给出）与目标输出（由𝑦给出）之间的误差最小。
+
+This can be formulated as an SLE given by 𝐻·𝛽 = 𝑦 这可以表述为一个 SLE
+
+Since H is typically not square and may not have an exact inverse,由于 H 通常不是正方形，可能没有精确的倒数
+
+We approximate 𝛽 with 𝛽 = (𝐻+) · 𝑦 
+- Where 𝐻+ is the Moore-Penrose Pseudoinverse of H 其中𝐻+ 是 H 的摩尔-彭罗斯伪逆。
+- In practice, 𝐻𝐻 +can be calculated using techniques like SVD.实际上，𝐻+ 可以通过 SVD 等技术计算出来。
+
+![alt text](image-43.png)
+
+![alt text](image-44.png)
+
+### Gaussian Processes
+
+A Gaussian Process is a probabilistic model that defines a distribution over functions.高斯过程是一种概率模型，它定义了函数的分布。
+
+Instead of modeling data points as fixed parameters, GPs model entire functions as random variables.GPs 不将数据点作为固定参数建模，而是将整个函数作为随机变量建模。
+
+These functions are characterised by a mean function and a covariance function (or kernel function)这些函数的特征是均值函数和协方差函数（或核函数）
+
+To create a GP function, we need to specify:要创建 GP 函数，我们需要指定
+
+- A mean function, $E[f(x_i)]=\mu (x_i)$
+
+- A covariance function aka a kernel function $Cov(f(x_i),f(x_j))=k(x_i,x_j)$又称核函数
+
+Let 𝑲x be the kernel matrix for inputs x. The entries of this matrix are k(xi,xj). This matrix is also known as the gram matrix. 让𝑲x成为输入 x 的内核矩阵。该矩阵的条目为k(xi,xj)。这个矩阵也被称为克矩阵。
+
+𝑲x must be positive and semidefinite for any X.对于任何 X，该矩阵都必须是正半有限矩阵。
+
+This forms a distribution over function values at an arbitrarily finite set of points.这就形成了任意有限点集合上函数值的分布。
+
+ Using the Kolmogorov Extension Theorem, we can extend this to be a distribution over functions, which is called a Gaussian Process.利用科尔莫哥罗夫扩展定理，我们可以将其扩展为函数的分布，这就是所谓的高斯过程。
+
+![alt text](image-45.png)
+
+Similar to SVMs, we can choose from a range of kernel functions to map our data.与 SVM 类似，我们可以选择一系列核函数来映射数据。
+
+A useful kernel is the RBF kernel:RBF 核是一个有用的核：
+
+![alt text](image-46.png)
+
+- It creates smooth, infinitely differentiable functions that are useful for modeling processes with smooth variations.它创建了平滑、无限可微的函数，可用于模拟具有平滑变化的过程。
+  
+- The hyperparameter 𝒍𝟐controls the length scale or the width of the kernel. Smaller values result in more wiggly functions, while larger values create smoother functions.超参数𝒍𝟐控制核的长度尺度或宽度。数值越小，函数越不稳定，数值越大，函数越平滑。
+
+![alt text](image-47.png)
+
+![alt text](image-48.png)
+
+### Linear Regression
+
+Linear Regression is a linear model that assumes the relationship between the input variables and the output is linear.线性回归是一种线性模型，假定输入变量与输出之间是线性关系。
+
+![alt text](image-50.png)
+
+To minimise this cost function, we apply the gradient descent algorithm, where we initialise the weights and iteratively adjust them in the direction of steepest descent.为了最小化这一成本函数，我们采用了梯度下降算法，即初始化权重，并沿着最陡峭下降的方向反复调整权重。
+
+![alt text](image-51.png)
+
+![alt text](image-52.png)
+
+## Clustering聚类
+
+Clustering is an unsupervised machine learning technique that aims to group data into clusters within the input space.聚类是一种无监督的机器学习技术，目的是在输入空间内将数据分组。
+
+- The goal of clustering is to discover hidden structures in the data without any prior knowledge of the groupings.聚类的目的是发现数据中隐藏的结构，而无需事先了解分组情况。
+- Clustering algorithms typically rely on a distance or similarity metric to measure how close or similar data points are in the feature space.聚类算法通常依靠距离或相似度量来衡量数据点在特征空间中的接近或相似程度。
+
+![alt text](image-53.png)
+
+### K-Means
+
+K-Means assumes there are k clusters among N input samples, and each data point is close to its cluster center (the mean of points in the cluster).K-Means 假设 N 个输入样本中有 k 个聚类，每个数据点都接近其聚类中心（聚类中各点的平均值）。
+
+To compute the cluster centers, the centers are randomly initialised, then iteratively moved towards their closest data points. 在计算聚类中心时，先随机初始化中心，然后迭代移动到最接近的数据点。
+
+![alt text](image-54.png)
+
+The standard K-Means algorithm works as follows:
+Initialisation: The k centroids are randomly initialised within the Euclidean space.初始化： 在欧氏空间内随机初始化 k 个中心点
+
+We then iteratively alternate between the following:然后，我们在以下几种情况之间反复交替：
+- Assignment: Assign each data point to its closest cluster.分配： 将每个数据点分配到最接近的聚类中。
+- Refitting: Move the centroid to the center of the new cluster.重新拟合： 将中心点移动到新聚类的中心。
+
+![alt text](image-55.png)
+
+![alt text](image-56.png)
+
+![alt text](image-57.png)
+
+![alt text](image-58.png)
+
+![alt text](image-59.png)
+
+### Hierarchical Clustering
+
+Clusters in hierarchical clustering are visually represented in a hierarchical tree called a dendrogram.分层聚类中的聚类以一种叫做树枝图的分层树直观地表示出来。
+
+There is no need to pre-specify the number of clusters. Instead, the dendrogram can be cut at the appropriate level to obtain the desired number of clusters.无需预先指定聚类的数量。相反，可以在适当的层次上切割树枝图，以获得所需的聚类数目。
+
+![alt text](image-60.png)
+
+There are two general approaches to Hierarchical Clustering:
+
+Agglomerative聚合
+Each object is initiall considered its own cluster. These clusters are merged with a distance metric until only one cluster remains. On a tree, this represents a bottom-up approach.每个对象最初都被视为自己的聚类。这些簇通过距离度量进行合并，直到只剩下一个簇。在一棵树上，这是一种自下而上的方法。
+
+Divisive分裂
+Each object is initially considered as one cluster. These clusters are split with a distance metric until each object is its own cluster. On a tree, this represents a top-down approach.每个对象最初被视为一个群组。这些簇会用距离度量进行拆分，直到每个对象都成为自己的簇为止。在一棵树上，这是一种自上而下的方法。
+
+![alt text](image-61.png)
+
+Split the data into two clusters.
+
+![alt text](image-62.png)
+
+Min Linkage
+
+![alt text](image-63.png)
+
+Max Linkage
+
+![alt text](image-64.png)
+
+Centroid Linkage
+
+![alt text](image-65.png)
+
+Average Linkage
+
+![alt text](image-66.png)
+
+- The ward linkage method computes the variance between the clusters rather than directly measuring the distance between classes.沃德联系法计算的是聚类之间的差异，而不是直接测量类之间的距离。
+- Compared to the distance-based measures described above, the Ward method is less susceptible to noise and outliers.与上述基于距离的测量方法相比，沃德方法不易受噪声和异常值的影响。
+
+### Fuzzy Clustering
+
+Fuzzy Clustering is similar to the K-Means algorithm with 1 key difference:模糊聚类与 K-Means 算法相似，但有一个主要区别：
+
+Data points within the fuzzy clusters do not belong to a singular cluster.模糊聚类中的数据点不属于一个单一的聚类。
+
+Instead, each data point has a coefficient for each cluster, representing the likelihood of the datapoint being part of that cluster.相反，每个数据点在每个聚类中都有一个系数，代表该数据点属于该聚类的可能性。
+
+The centroid of a cluster is the mean of all points, weighted by their degree of belonging to the cluster.聚类的中心点是所有点的平均值，并根据其属于该聚类的程度进行加权。
+
+## NLP Applications
+
+- Many traditional ML algorithms require structured numerical input to function effectively.许多传统的 ML 算法需要结构化的数字输入才能有效运行。
+- For text classification, this means we have to find a numerical representation for textual data.对于文本分类来说，这意味着我们必须为文本数据找到一种数字表示方法。
+- This can come in the form of TF-IDF vectorisation or other vectorisation techniques (covered next week).其形式可以是 TF-IDF 矢量化或其他矢量化技术（下周介绍）。
+- In the context of NLP, classifiers can be used to perform sentiment analysis, intent classification and authorship attribution, just to name a few.在 NLP 中，分类器可用于进行情感分析、意图分类和作者归属等。
+- Similarly, clustering techniques can help us perform document clustering and tasks like spam detection.同样，聚类技术可以帮助我们执行文档聚类和垃圾邮件检测等任务。
+
+# Week 5
+
+## Evaluation Metrics评估指标
+
+After the process of text classification, there is a need for us to evaluate the accuracy of our models quantitatively.文本分类过程结束后，我们需要对模型的准确性进行定量评估。
+
+Evaluation metrics assist us in the following tasks:评估指标有助于我们完成以下任务：
+
+Objective Comparisons客观比较
+Metrics provide a common framework for assessing and comparing performance, allowing us to objectively compare the performances of our NLP models.度量标准为评估和比较性能提供了一个通用框架，使我们能够客观地比较 NLP 模型的性能。
+
+Model Selection模型选择
+Evaluation metrics help us make informed choices in selecting the best-performing model or system among multiple candidates.评估指标有助于我们做出明智的选择，从多个候选模型或系统中选出性能最佳的模型或系统。
+
+Hyperparameter Tuning超参数调整
+When tuning hyperparameters and optimising models, evaluation metrics guide the process. Evaluation metrics allow us to assess the impact of hyperparameter choices and select the set of hyperparameters that lead to the best performance.在调整超参数和优化模型时，评估指标对整个过程具有指导作用。通过评估指标，我们可以评估超参数选择的影响，并选择能带来最佳性能的超参数集。
+
+Text models are generally split into two types;文本模型一般分为两种；
+
+Predictive: Models trained to make predictions or classifications based on input data. These are our classification models and regression models.预测性： 根据输入数据进行预测或分类的训练模型。这些是我们的分类模型和回归模型。
+Evaluation metrics include:
+▪ Confusion Matrix混淆矩阵
+▪ F1 ScoresF1 分数
+▪ Area Under Curve (AUC-ROC)曲线下面积 (AUC-ROC)
+
+Generative: Models trained to create new data, typically in the form of text. These come in the form of AI Chatbots, translators and text summarisers.生成： 为创建新数据而训练的模型，通常以文本形式出现。其形式包括人工智能聊天机器人、翻译器和文本摘要器。
+Evaluation metrics include:
+▪ BLEU
+▪ ROUGE
+▪ METEOR
+
+### Confusion Matrix
+
+A confusion matrix is an N X N matrix, where N is the number of predicted classes.混淆矩阵是一个 N X N 矩阵，其中 N 是预测类别的数量。
+
+For a binary prediction, the confusion matrix will be a 2 x 2 matrix.对于二元预测，混淆矩阵将是一个 2 x 2 矩阵。
+
+A 2 x 2 matrix will feature 4 different combinations of predicted and actual values.2 x 2 矩阵将包含预测值和实际值的 4 种不同组合。
+
+▪ True Positive (TP): Accurately predicted positive values.真实正值 (TP)： 准确预测正值。
+▪ True Negative (TN): Accurately predicted negative values.真负值 (TN)： 准确预测的负值。
+▪ False Positive (FP): (Type 1 Error): Negative values inaccurately predicted to be positive.假阳性 (FP)：（类型 1 错误）： 不准确预测为阳性的负值。
+▪ False Negative (FN): (Type 2 Error): Positive values inaccurately predicted to be negative.假阴性 (FN)：（类型 2 误差）： 不准确地将正值预测为负值。
+
+Other metrics can be calculated from the confusion matrix, including:根据混淆矩阵还可以计算出其他指标，包括
+▪ Accuracy: the proportion of the total number of predictions that are correct.准确度：正确预测占预测总数的比例。
+▪ Positive Predictive Value or Precision: the proportion of positive cases that are correctly identified.阳性预测值或精确度：正确识别的阳性案例比例。
+▪ Negative Predictive Value: the proportion of negative cases that are correctly identified.阴性预测值：正确识别的阴性病例比例。
+▪ Sensitivity or Recall: the proportion of actual positive cases which are correctly identified.灵敏度或召回率：正确识别出的实际阳性病例的比例。
+▪ Specificity: the proportion of actual negative cases which are correctly identified.特异性：正确识别出的实际阴性病例的比例。
+▪ Rate: It is a measuring factor in a confusion matrix. It has also 4 types TPR, FPR, TNR, and FNR.率： 它是混淆矩阵中的一个测量因子。它也有 4 种类型：TPR、FPR、TNR 和 FNR。
+
+![alt text](image-67.png)
+
+Accuracy:
+▪ Defined by $\frac{𝑇𝑃+𝑇𝑁}{ 𝑇𝑃+𝑇𝑁+𝐹𝑃+𝐹𝑁}$
+
+▪ Provides an overall assessment of the model's correctness.对模型的正确性进行总体评估。
+
+▪ Can be misleading when dealing with imbalanced datasets, where one class significantly outnumbers the other.在处理不平衡数据集时可能会产生误导，即一个类别的数量明显多于另一个类别。
+
+Precision:
+▪ Defined by $\frac{𝑇𝑃} {𝑇𝑃+𝐹𝑃}$
+▪ Quantifies the proportion of positive predictions that were correct.量化正确预测中正面预测的比例。
+▪ Used in cases where false positives are costly or undesirable.用于误报代价高或不受欢迎的情况。
+
+Recall:
+▪ Defined by $\frac{𝑇𝑃}{𝑇𝑃+𝐹𝑁}$
+▪ Measures the proportion of actual positive cases that were correctly identified by the model.测量模型正确识别的实际阳性病例的比例。
+▪ Used when missing a positive can have serious consequences.用于漏检阳性结果会造成严重后果的情况。
+
+### Micro and Macro Metrics
+
+Micro and macro evaluation metrics are two different approaches to aggregating and reporting performance measures, such as precision, recall, and F1-Score.微观和宏观评价指标是汇总和报告精确度、召回率和 F1 分数等性能指标的两种不同方法。
+
+Micro Metrics:
+Aggregate the contributions of all classes to compute the average metric.汇总所有类别的贡献，计算平均度量。
+▪ Micro Precision:
+▪ Calculates the precision for each class individually, sums up the numerators (true positives), and divides by the sum of the denominators (true positives and false positives) across all classes.单独计算每个类别的精确度，将分子（真阳性）相加，然后除以所有类别的分母（真阳性和假阳性）之和。
+
+$\frac{𝑇𝑃1 +𝑇𝑃2 +⋯+𝑇𝑃𝑁}{𝑇𝑃1 +𝑇𝑃2 +⋯+𝑇𝑃𝑁+ 𝐹𝑃1 +𝐹𝑃2 +⋯+𝐹𝑃𝑁}$
+
+Macro Metrics:
+Evaluate the model's performance on each class independently and then average the results.独立评估模型在每个类别上的表现，然后求取平均值。
+▪ Macro Precision:
+▪ Calculates the precision for each class individually and then takes the average of these precision scores.单独计算每个类别的精确度，然后取这些精确度分数的平均值。
+
+$\frac {𝑃𝑟𝑒𝑐𝑖𝑠𝑖𝑜𝑛1 +𝑃𝑟𝑒𝑐𝑖𝑠𝑖𝑜𝑛2 +⋯+𝑃𝑟𝑒𝑐𝑖𝑠𝑖𝑜𝑛𝑁}{N}$
+
+▪ Micro metrics are used when overall classification performance needs to be emphasized, giving equal importance to all instances. They are particularly useful when class imbalance is present, as they consider all instances collectively.微指标用于需要强调整体分类性能的情况，对所有实例给予同等重视。当存在类别不平衡时，微观指标尤其有用，因为它们会综合考虑所有实例。
+▪ Macro metrics are used to evaluate the model's performance on each class independently and then average the results. They are suitable when each class is considered equally important and the model's ability to perform well on all classes is to be assessed.宏观指标用于独立评估模型在每个类别上的性能，然后将结果平均。当每个类别被认为同等重要，并且需要评估模型在所有类别上的表现能力时，这些指标就非常适合。
+
+To apply confusion matrices, let’s use last week’s results on the IMDB dataset:
+
+![alt text](image-68.png)
+
+![alt text](image-69.png)
+
+### F1 Score
+
+▪ The harmonic mean of precision and recall values for a classification problem.分类问题的精确度和召回值的调和平均值。
+▪ Allows us to optimise both precision and recall values for a classification problem.允许我们对分类问题的精确度和召回值进行优化。
+▪ The formula is given by: $(\frac{𝑟𝑒𝑐𝑎𝑙𝑙^{−1}+𝑝𝑟𝑒𝑐𝑖𝑠𝑖𝑜𝑛^{−1}}{2})^{−1} = 2 ∙ \frac{𝑝𝑟𝑒𝑐𝑖𝑠𝑖𝑜𝑛∙𝑟𝑒𝑐𝑎𝑙𝑙}{𝑝𝑟𝑒𝑐𝑖𝑠𝑖𝑜𝑛+𝑟𝑒𝑐𝑎𝑙𝑙}$
+▪ Harmonic mean is used in place of an arithmetic mean as it gives a more balanced measure when dealing with extreme values.使用谐平均数代替算术平均数，因为在处理极端值时，谐平均数能提供更均衡的测量。
+▪ Consider an extreme scenario where we have precision of 0.9 and recall of 0.1考虑精确度为 0.9、召回率为 0.1 的极端情况。
+▪ An arithmetic mean will yield 0.5, suggesting moderate performance.算术平均值为 0.5，表明性能适中。
+▪ The harmonic mean will yield 0.18, indicating a significant issue in balancing between precision and recall.调和平均数的结果为 0.18，表明在平衡精确度和召回率方面存在重大问题。
+
+F-1 Scores can be implemented in SKLearn as such:
+
+![alt text](image-70.png)
+
+### Area Under Curve (AUC-ROC)
+
+▪ The Receiver Operating Characteristic (ROC) curve is a graphical representation of a model's performance.接收者工作特征曲线（ROC）是模型性能的图形表示。
+▪ The Area Under Curve of the ROC curve (AUC-ROC) is the most widely used metric in measuring the performance of binary classification models where the underlying model outputs are probabilistic values.ROC 曲线下面积（AUC-ROC）是衡量二元分类模型性能最广泛使用的指标，在这些模型中，基础模型输出是概率值。
+▪ For these models, classification is done by choosing a decision boundary (threshold value). For example, model outputs with a value >=0.5 can be labeled to the class 1, and <0.5 to the class 0.对于这些模型，分类是通过选择一个决策边界（阈值）来完成的。例如，数值 >=0.5 的模型输出可标记为类别 1，而 <0.5 则标记为类别 0。
+▪ Different choices of decision boundary will give different True Positive Rate and False Positive Rate不同的判定边界会产生不同的真阳性率和假阳性率。
+▪ The ROC curve is created by plotting the True Positive Rate against the False Positive Rate as we vary the model decision boundary (threshold).当我们改变模型的判定边界（阈值）时，通过绘制真阳性率与假阳性率的对比曲线，可以创建 ROC 曲线。
+▪ The ROC curve reflects the trade-off between a model's ability to correctly identify positive instances (True Positives) and its tendency to incorrectly classify negative instances as positive (False Positives).ROC 曲线反映了模型正确识别阳性实例（真阳性）的能力与错误地将阴性实例归类为阳性（假阳性）的倾向之间的权衡。
+
+▪ The Receiver Operating Characteristic (ROC) curve is a graphical representation of a model’s performance.接收者工作特征曲线 (ROC) 是模型性能的图形表示。AUC-ROC 是一个标量值，表示 ROC 曲线下的面积。
+▪ The AUC-ROC is a scalar value that represents the area under the ROC curve.
+▪ Values range from 0-1:数值范围为 0-1：
+▪ A model with an AUC-ROC value of 0.5 performs no better than random chance.AUC-ROC 值为 0.5 的模型的表现并不比随机概率好。
+▪ A model with an AUC-ROC value greater than 0.5 indicates a better-than-random classifier.AUC-ROC 值大于 0.5 的模型表示分类器优于随机分类器。
+▪ A model with an AUC-ROC value of 1 is a perfect classifier, meaning it has achieved perfect discrimination between the classes.AUC-ROC 值为 1 的模型是完美的分类器，这意味着它实现了类别之间的完美区分。
+
+![alt text](image-71.png)
+
+To generate a ROC curve, we can use the metrics library in SKLearn.
+
+![alt text](image-72.png)
+
+### BLEU
+
+▪ Bilingual Evaluation Understudy (BLEU) evaluates the similarity between a target sentence and a generated sentence.双语评估（BLEU）评估目标句和生成句之间的相似性。
+▪ BLEU counts the number of n-grams that appear in both the generated sentence and the target sentence.BLEU 计算同时出现在生成句和目标句中的 n-gram 的数量。
+▪ Common n-gram sizes used are 1, 2, 3, or 4.常用的 n-gram 大小为 1、2、3 或 4。
+▪ BLEU calculates the precision of matching n-grams.BLEU 计算 n-gram 匹配的精确度。
+▪ Mostly used in machine translation applications.多用于机器翻译应用。
+
+▪ Precision is defined as:
+
+\[
+    𝑃𝑟𝑒𝑐𝑖𝑠𝑖𝑜𝑛 = \frac {𝑇𝑜𝑡𝑎𝑙 𝑛𝑢𝑚𝑏𝑒𝑟 𝑜𝑓 𝑐𝑜𝑟𝑟𝑒𝑐𝑡𝑙𝑦 𝑝𝑟𝑒𝑑𝑖𝑐𝑡𝑒𝑑 𝑛−𝑔𝑟𝑎𝑚𝑠 𝑖𝑛 𝑡ℎ𝑒 𝑡𝑎𝑟𝑔𝑒𝑡 𝑠𝑒𝑛𝑡𝑒𝑛𝑐𝑒}{𝑇𝑜𝑡𝑎𝑙 𝑛𝑢𝑚𝑏𝑒𝑟 𝑜𝑓 𝑛−𝑔𝑟𝑎𝑚𝑠 𝑖𝑛 𝑡ℎ𝑒 𝑝𝑟𝑒𝑑𝑖𝑐𝑡𝑒𝑑 𝑠𝑒𝑛𝑡𝑒𝑛𝑐𝑒}
+\]
+
+We first focus on 1-grams (single words).
+
+Predicted Sentence: He eats an apple.
+Target Sentence: He ate an apple.
+In this case, the precision for the predicted sentence is 3/4.在这种情况下，预测句子的精确度为 3/4。
+
+However, consider the following:
+Predicted Sentence: He He He.
+Target Sentence: He ate an apple.
+
+Predicted Sentence: He He He eats tasty fruit.
+Target Sentence: He ate an apple.
+Target Sentence: He is eating a tasty apple.
+
+To avoid repetitions, we use clipped precision instead of precision:为避免重复，我们使用精确度剪切代替精确度：
+▪ We compare each word from the predicted sentence with all the target sentences. If the word has a match in any target sentence, it is considered correct.我们将预测句子中的每个单词与所有目标句子进行比较。如果该词在任何目标句中都有匹配，则认为该词是正确的。
+▪ We limit the count for each correct word to the maximum number of times that that word occurs across all target sentences. This helps to avoid the repetition problem. 我们将每个正确单词的计数限制为该单词在所有目标句中出现的最大次数。这有助于避免重复问题。
+The clipped precision of our predicted sentence is 2/6 (As the repeated “He”s are not counted.)我们预测句子的剪切精度为 2/6（因为重复出现的 “他 ”没有计算在内）。
+
+BLEU calculated the precision n-gram scores for translated sentences.BLEU 计算翻译句子的精确度 n-gram 分数。
+
+Predicted Sentence: The guard arrived late because it was raining.
+Target Sentence: The guard arrived late because of the rain.
+
+![alt text](image-73.png)
+
+![alt text](image-74.png)
+
+The geometric average of the 4-gram is computed as such:4-gram 的几何平均数就是这样计算出来的：
+
+![alt text](image-75.png)
+
+A brevity penalty is then added to penalize sentences that are too short. (As shorter sentences can generate a misleading probability).然后再加上简短惩罚，以惩罚过于简短的句子。(因为较短的句子会产生误导概率)。
+
+![alt text](image-76.png)
+
+The BLEU score is then given by:
+
+\[
+    𝐵𝐿𝐸𝑈 = 𝐵𝑟𝑒𝑣𝑖𝑡𝑦 𝑃𝑒𝑛𝑎𝑙𝑡𝑦 ∙ 𝐺𝑒𝑜𝑚𝑒𝑡𝑟𝑖𝑐 𝐴𝑣𝑒𝑟𝑎𝑔𝑒 𝑃𝑟𝑒𝑐𝑖𝑠𝑖𝑜𝑛 (𝑁)
+\]
+
+Python implementation of BLEU:
+
+![alt text](image-77.png)
+
+### ROUGE
+
+▪ Recall-Oriented Understudy for Gisting Evaluation (ROUGE) is a set of metrics commonly used for text summarisation tasks.以召回为导向的摘要评估研究（ROUGE）是一组常用于文本摘要任务的指标。
+▪ ROUGE scores are designed to assess the similarity and overlap between the words or phrases in the machine-generated text and the reference text.ROUGE 分数旨在评估机器生成文本中的单词或短语与参考文本之间的相似度和重叠度。
+▪ The general formula for ROUGE is given as:
+
+\[
+    ROUGE = \Sigma (𝑅𝑒𝑐𝑎𝑙𝑙 𝑜𝑓 𝑛 − 𝑔𝑟𝑎𝑚𝑠)
+\]
+
+▪ ROUGE is split into 3 types:
+▪ ROUGE-N: ROUGE-N measures the overlap of n-grams.ROUGE-N 测量 n-grams 的重叠度。
+▪ ROUGE-L: ROUGE-L measures the longest common subsequence (LCS) between the candidate text and the reference text.ROUGE-L 测量候选文本与参考文本之间的最长共同子序列 (LCS)。
+▪ ROUGE-S: ROUGE-S measures the skip-bigram (bi-gram with at most one intervening word) overlap between the candidate text and the reference text.ROUGE-S： ROUGE-S 测量候选文本与参考文本之间的跳字重合度（最多有一个间隔词的双元组）。
+
+#### ROUGE-N
+
+▪ ROUGE-N measures the overlap of n-grams (contiguous sequences of n words) between the candidate text and the reference text.ROUGE-N 衡量候选文本和参考文本之间 n-grams（n 个单词的连续序列）的重叠度。
+▪ Precision, recall, and F1-score are computed based on the n-gram overlap.精确度、召回率和 F1 分数根据 n-gram 重叠度计算。
+▪ Used to evaluate the grammatical correctness and fluency of generated text.用于评估生成文本的语法正确性和流畅性。
+▪ Precision and Recall given by:精确度和召回率由以下公式给出：
+
+![alt text](image-78.png)
+
+#### ROUGE-L
+
+▪ Measures the longest common subsequence (LCS) between the candidate text and the reference text.测量候选文本与参考文本之间的最长公共子序列（LCS）。
+▪ Precision, recall, and F1-score are computed based on the length of the LCS.根据 LCS 的长度计算精确度、召回率和 F1 分数。
+▪ Used to evaluate the semantic similarity and content coverage of generated text.用于评估生成文本的语义相似性和内容覆盖率。
+▪ Precision and Recall given by:精确度和召回率由以下公式给出：
+
+![alt text](image-79.png)
+
+#### ROUGE-S
+
+▪ Measures the skip-bigram (bi-gram with at most one intervening word) overlap between the candidate text and the reference text.测量候选文本与参考文本之间的跳格（最多有一个间隔词的双格）重叠度。
+▪ Precision, recall, and F1-score are computed based on the skip-bigram overlap.精确度、召回率和 F1 分数都是根据跳读重合度计算的。
+▪ Used to evaluate the coherence and local cohesion of generated text.用于评估生成文本的连贯性和局部内聚性。
+▪ Precision and Recall given by:精确度和召回率由以下公式给出：
+
+![alt text](image-80.png)
+
+To implement the ROUGE score, we can use the evaluate library from HuggingFace
+
+![alt text](image-81.png)
+
+### METEOR
+
+▪ Metric for Evaluation of Translation with Explicit Ordering (METEOR) is used to assess the quality of machine translation systems.显式排序翻译评估指标 (METEOR) 用于评估机器翻译系统的质量。
+▪ It complements other popular metrics like BLEU and ROUGE.它是对 BLEU 和 ROUGE 等其他流行指标的补充。
+▪ METEOR takes into account the sequence of words in the output sentence.METEOR 考虑了输出句子中单词的顺序
+▪ It considers the importance of word order in evaluating the translation quality.它考虑了词序在评估翻译质量中的重要性。
+
+▪ To account for word order, a chunk penalty is included in the calculation of the METEOR metric.为了考虑词序问题，在计算 METEOR 指标时加入了词块惩罚。
+▪ Intuitively, it represents the idea that a good translation should not only have words that are synonymous with the reference, but the words should also be in the correct order and grouped together in meaningful chunks.直观地说，它代表了这样一种理念，即好的译文不仅要有与参考文献同义的词语，而且词语的顺序也要正确，并以有意义的语块形式组合在一起。
+▪ The chunk penalty is computed as:语块惩罚的计算公式为
+
+![alt text](image-83.png)
+
+▪ The final METEOR score is then given by: 𝑀=𝐹𝑚𝑒𝑎𝑛 (1−𝑝), where Fmean is a modified F1 score specifically used in METEOR. METEOR 的最终得分由以下公式得出： 𝑀=𝐹𝑚𝑒𝑎𝑛 (1-𝑝)，其中 Fmean 是 METEOR 专门使用的修正 F1 分数。
+
+![alt text](image-84.png)
+
+## Word Embeddings 词语嵌入
+
+▪ To process textual data, we must convert raw text data into meaningful numerical representations.要处理文本数据，我们必须将原始文本数据转换成有意义的数字表示。
+▪ We have previously covered methods like BOW and TF-IDF.我们之前介绍过 BOW 和 TF-IDF 等方法。
+▪ These methods however, have important drawbacks:但是，这些方法都有重要的缺点
+- They have limited ability in capture semantic meaning of the words.它们捕捉词语语义的能力有限。
+- They are computationally inefficient and require high-dimensional presentation when the corpus is large.计算效率低，当语料库较大时需要高维呈现。
+▪ We will introduce two advanced embedding methods that significantly improves on these issues:我们将介绍两种先进的嵌入方法，它们能显著改善这些问题：
+- Word2Vec
+▪ A neural network approach to train word embeddings.训练词嵌入的神经网络方法。
+- GloVE
+▪ A model using a global count-based matrix factorisation approach.一种使用基于全局计数的矩阵因式分解方法的模型。
+
+### Word2Vec
+
+▪ Word2Vec's key idea is that words that have similar meanings or are used in similar contexts should have similar vector representations.Word2Vec 的主要理念是，具有相似含义或在相似语境中使用的单词应具有相似的向量表示。
+▪ This enables Word2Vec to capture the semantic relationships between words. For example, it can represent that "king" is to "queen" as "man" is to "woman”.这使得 Word2Vec 能够捕捉词语之间的语义关系。例如，它可以表示 “国王 ”与 “王后 ”的关系，就像 “男人 ”与 “女人 ”的关系一样。
+▪ Word2Vec includes two main models:Word2Vec 包括两个主要模型：
+▪ Continuous Bag of Words (CBOW):连续词袋 ：
+▪ Aims to predict a target word based on its context words.旨在根据上下文单词预测目标单词。
+▪ Skip-gram:
+▪ Predicts context words given a target word.根据目标词预测上下文词。
+
+#### Word2Vec - CBOW
+
+Goal: Predict a target word based on context words surrounding the target word.目标： 根据目标词周围的语境词预测目标词。
+
+![alt text](image-85.png)
+
+#### Word2Vec – Skip-gram
+
+Goal: Predict context words from a target word.目标：根据目标单词预测上下文单词。
+
+![alt text](image-86.png)
+
+![alt text](image-87.png)
+
+More data is generated using the same sliding window in the Skip-gram model.在跳过图模型中，使用相同的滑动窗口生成更多数据。
+
+CBOW
+▪ CBOW is computationally more efficient and often trains faster than Skip-gram.CBOW 的计算效率更高，通常比 Skip-gram 的训练速度更快。
+▪ A good choice for smaller datasets or when you want to quickly generate word embeddings.对于较小的数据集或想要快速生成词嵌入时，CBOW 是一个不错的选择。
+▪ It can be more effective when the context window size is relatively small, as it directly predicts the target word based on nearby words.当上下文窗口相对较小时，它可能会更有效，因为它会根据附近的单词直接预测目标单词。
+
+Skip-gram
+▪ Skip-gram is often preferred when you have a large dataset with a rich vocabulary and you want to capture semantic relationships between words effectively.当你拥有一个词汇丰富的大型数据集，并希望有效捕捉词与词之间的语义关系时，通常会首选跳过图。
+▪ It can capture rare words and infrequent word associations better than CBOW.与 CBOW 相比，它能更好地捕捉罕见词和不常见词的关联。
+
+The Skip-gram model is preferred when training on large datasets.在大型数据集上进行训练时，首选跳过图模型。
+
+▪ The Word2Vec model is based on a shallow neural network consisting of an input layer, a densely connected hidden layer and an output layer.Word2Vec 模型基于浅层神经网络，由输入层、密集连接的隐藏层和输出层组成。
+
+![alt text](image-88.png)
+
+▪ Word2Vec is trained iteratively as follows:Word2Vec 的迭代训练过程如下：
+▪ Given a large text corpus;给定一个大型文本语料库；
+▪ Go over the text with a sliding window, moving one word at a time.用滑动窗口浏览文本，每次移动一个词。
+▪ At each step, there is a target word and surrounding context words;每一步都有一个目标词和周围的语境词；
+▪ In the Skip-gram setup, compute prediction probabilities of context words based on the target word;在跳格设置中，根据目标词计算上下文词的预测概率；
+▪ These predictions are updated through standard neural network iterations.通过标准神经网络迭代更新这些预测结果。
+
+#### Training:
+
+▪ Create 2 matrices, the Embedding and Context Matrix.创建 2 个矩阵，即嵌入矩阵和上下文矩阵。
+▪ Initialise matrix with random numbers.用随机数初始化矩阵。
+▪ In each training step, we take one positive example and its associated negative examples.在每个训练步骤中，我们取一个正面示例及其相关的负面示例。
+
+![alt text](image-89.png)
+
+▪ Input words are found in the embedding matrix.在嵌入矩阵中找到输入词。
+▪ We find the corresponding output words in the context matrix.在上下文矩阵中找到相应的输出词。
+▪ Calculate similarity between input and output words using dot product.使用点积计算输入词和输出词之间的相似度。
+▪ Pass it through a sigmoid function to convert it into probabilities.通过 sigmoid 函数将其转换为概率。
+▪ Calculate loss function.计算损失函数。
+
+![alt text](image-90.png)
+
+![alt text](image-91.png)
+
+▪ The error score is used to adjust the embeddings of output words.误差分值用于调整输出词的嵌入。
+▪ The next time this calculation is made, the result would be closer to the target scores.下一次计算时，结果将更接近目标分数。
+▪ Iteratively perform this through every input word.对每个输入单词进行迭代计算。
+▪ After training, the context embeddings are discarded, leaving us with the final embedding vector.训练结束后，丢弃上下文嵌入，留下最终的嵌入向量。
+
+![alt text](image-92.png)
+
+![alt text](image-93.png)
+
+![alt text](image-94.png)
+
+#### Probability
+
+▪ For the Word2Vec model, the objective is to maximise the average log-probability of the context words occurring around the input word over the entire vocabulary.对于 Word2Vec 模型，其目标是最大限度地提高整个词汇量中输入单词周围出现的上下文单词的平均对数概率。
+
+![alt text](image-95.png)
+
+Where T is all the words in the training data and c is the training context window其中，T 是训练数据中的所有单词，c 是训练上下文窗口
+
+One way to calculate the above probability is to use the SoftMax function: 计算上述概率的一种方法是使用 SoftMax 函数：
+
+![alt text](image-96.png)
+
+Where 𝑣𝑤 and 𝑣′𝑤 are the vector representations of the word w as the input and output, respectively. Also, W is the number of words in the entire vocabulary.其中，𝑣𝑤 和 𝑣′𝑤 分别是输入和输出词 w 的向量表示。此外，W 是整个词汇表中的单词数。
+
+#### SoftMax
+
+▪ The intuition is that words that appear in the same context will have similar vector representations.直觉告诉我们，在相同语境中出现的单词会有相似的向量表示。
+▪ The numerator in the equation will show this by assigning a larger value for similar words through the dot product of the two vectors.等式中的分子会通过两个向量的点积为相似的单词分配一个较大的值，从而显示出这一点。
+▪ However, the denominator, which is a normalizing factor that has to be computed over the entire vocabulary, is extremely difficult to compute for large vocabularies.然而，分母是一个归一化系数，必须在整个词汇量中计算，对于庞大的词汇量来说计算起来非常困难。
+
+#### Negative Sampling
+
+▪ Negative sampling is a workaround that aims at maximising the similarity of the words in the same context and minimising it when they occur in different contexts.负抽样是一种变通方法，其目的是在同一上下文中最大限度地提高词语的相似度，而在不同上下文中最大限度地降低词语的相似度。
+▪ Instead of doing the minimisation for all the words in the dictionary except for the context words, it randomly selects a handful of words (2 ≤ k ≤ 20) depending on the training size and uses them to optimize the objective.它不是对词典中除上下文单词以外的所有单词进行最小化处理，而是根据训练规模随机选择少量单词（2 ≤ k ≤ 20），并用它们来优化目标。
+▪ A larger k is chosen for smaller datasets and vice versa较小的数据集选择较大的 k，反之亦然。
+
+![alt text](image-97.png)
+
+Where 𝜎 is the sigmoid function and 𝑃𝑛(𝑤)is the noise distribution with the negative samples drawn fromit. It’s calculated as the unigram distribution of the words to the power of ¾.其中，𝜎 为 sigmoid 函数，𝑃𝑛(𝑤)为噪声分布，并从中抽取负样本。它的计算方法是单字分布为 ¾ 的幂。
+
+![alt text](image-98.png)
+
+Where Z is a normalisation constant.其中，Z 是归一化常数。
+
+### GloVe
+
+▪ Global Vectors for Word Representation (GloVe) is an unsupervised machine learning algorithm used for generating word embeddings.用于单词表示的全局向量（GloVe）是一种用于生成单词嵌入的无监督机器学习算法。
+▪ Designed to capture the global co-occurrence statistics of words from a large corpus of text.旨在从大量文本语料库中捕捉词语的全局共现统计。
+▪ It counts the frequency of each word appearing in the context of every other word in a fixed window size.它可以统计每个词在固定窗口大小的上下文中与其他每个词出现的频率。
+▪ A co-occurrence matrix X is constructed, where a cell Xij is a “strength” which represents how often the word i appears in the context of the word j.构建共现矩阵 X，其中单元格 Xij 是 “强度”，表示单词 i 在单词 j 的上下文中出现的频率。
+▪ In some sense, GloVe goes beyond Word2Vec, but not only considering local context, but also aggregating the results to a global count.从某种意义上说，GloVe 超越了 Word2Vec，它不仅考虑了本地上下文，还将结果汇总为全局计数。
+
+▪ For each pair of words, i, j, we can build a cost (loss) term as follows:对于每一对词 i、j，我们可以建立一个成本（损失）项如下：
+
+![alt text](image-99.png)
+
+where 𝑏𝑖 and 𝑏𝑗 are scalar bias terms associated with words i and j, respectively.其中，𝑏𝑖 和 𝑏𝑗 分别是与词 i 和词 j 相关的标量偏差项。
+▪ To generate these vectors, we minimise an objective function, J which evaluates the sum of all squared errors based on the above equation, weighted with a function f:为了生成这些向量，我们要最小化目标函数 J，该函数根据上述等式评估所有平方误差之和，并用函数 f 加权：
+
+![alt text](image-100.png)
+
+Where V is the size of the vocabulary.其中，V 是词汇量的大小。
+▪ The function f is used to prevent the model from being overly influenced by very common word pairs.函数 f 用于防止模型受到非常常见的词对的过度影响。
+▪ A typical form of the function f is as follows.函数 f 的典型形式如下。
+
+![alt text](image-101.png)
+
+![alt text](image-102.png)
+
+![alt text](image-103.png)
+
+## Summary
+
+Evaluation Metrics:
+Confusion Matrix:
+A table used in machine learning that summarises the performance of a classification model by comparing actual and predicted values, showing counts of true positives, true negatives, false positives, and false negatives.机器学习中使用的表格，通过比较实际值和预测值来总结分类模型的性能，显示真阳性、真阴性、假阳性和假阴性的计数。
+F1 Scores:
+A single metric that combines precision and recall into a single value, providing a balanced measure of a model's accuracy in binary classification tasks.将精确度和召回率合并为一个值的单一指标，可均衡地衡量模型在二元分类任务中的准确性。
+AUC-ROC:
+A metric used to evaluate the performance of a binary classification model by measuring the area under the Receiver Operating Characteristic (ROC) curve, reflecting the model's ability to distinguish between classes.用于评估二元分类模型性能的指标，通过测量接收者工作特征曲线（ROC）下的面积来反映模型区分类别的能力。
+
+BLEU:
+A metric for evaluating the quality of machine-generated text by comparing it to human-generated reference text based on n-gram overlap and precision.基于 n-gram 重合度和精确度，将机器生成的文本与人工生成的参考文本进行比较，从而评估机器生成文本质量的指标。
+ROUGE:
+A set of metrics used for evaluating the quality of machine-generated text by measuring the overlap of n-grams and other text units between the generated text and reference text.通过测量生成文本与参考文本之间的 n-grams 和其他文本单位的重叠度，用于评估机器生成文本质量的一组指标。
+METEOR:
+A metric that emphasizes on the importance of word order in machine translations.强调词序在机器翻译中重要性的指标。
+
+Word Embeddings:
+Word2Vec:
+A popular word embedding technique that learns dense vector representations of words by predicting words in their context, capturing semantic relationships between words in a continuous vector space.一种流行的单词嵌入技术，通过预测单词的上下文来学习单词的密集向量表示，从而在连续向量空间中捕捉单词之间的语义关系。
+GloVe:
+An unsupervised word embedding algorithm that captures global co-occurrence statistics of words from a large text corpus to create vector representations that encode semantic meaning and relationships between words.一种无监督的词语嵌入算法，可从大型文本语料库中捕捉词语的全局共现统计信息，从而创建可编码词语语义和词语间关系的向量表示。
