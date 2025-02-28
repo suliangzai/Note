@@ -1236,3 +1236,512 @@ Word2Vec:
 A popular word embedding technique that learns dense vector representations of words by predicting words in their context, capturing semantic relationships between words in a continuous vector space.一种流行的单词嵌入技术，通过预测单词的上下文来学习单词的密集向量表示，从而在连续向量空间中捕捉单词之间的语义关系。
 GloVe:
 An unsupervised word embedding algorithm that captures global co-occurrence statistics of words from a large text corpus to create vector representations that encode semantic meaning and relationships between words.一种无监督的词语嵌入算法，可从大型文本语料库中捕捉词语的全局共现统计信息，从而创建可编码词语语义和词语间关系的向量表示。
+
+# Week 6
+
+## Sequential Data
+
+Sequential data is organised in a specific order, often with a time-based or chronological sequence.顺序数据是按照特定的顺序组织的，通常以时间或年代为顺序。
+▪ The order in which the data points occur is essential for understanding the data's meaning.数据点出现的顺序对于理解数据的含义至关重要。
+▪ In sequential data, each data point is likely correlated to both the earlier and later data points in the sequence.在顺序数据中，每个数据点都可能与序列中的前一个和后一个数据点相关。
+
+Textual Data：
+▪ The meaning of a text often depends on the order of words and the grammatical rules that govern their arrangement.文本的含义通常取决于词语的顺序和规范词语排列的语法规则。
+▪ Understanding the text often requires knowledge of what came before and what follows.理解文本通常需要了解前文和后文的内容。
+▪ The meaning of a word or phrase can change based on the context provided by the surrounding text.一个单词或短语的含义会根据周围文本提供的上下文发生变化。
+
+Traditional models, such as simple linear regression or basic feedforward neural networks,
+often struggle with handling sequential data for several reasons:传统的模型，如简单的线性回归或基本的前馈神经网络，在处理连续数据时往往会遇到困难，原因有以下几点：
+
+Lack of Memory
+Traditional models do not possess the inherent ability to remember or capture long-term dependencies within the sequence.传统模式不具备记忆或捕捉序列中长期依赖关系的内在能力。
+
+Order Insensitivity
+Traditional models treat data as unordered, meaning they do not inherently understand the significance of the order of data points in a sequence.传统模型将数据视为无序数据，这意味着它们本质上并不了解序列中数据点顺序的重要性。
+
+Variable-Length Limitation
+Traditional models are designed to work with fixed- length input. However, sequential data often comes in variable lengths.传统模型设计用于固定长度的输入。然而，顺序数据通常是可变长度的。
+
+▪ To process sequential data effectively, we need models that can account for the interconnectedness of sequential data.要有效处理顺序数据，我们需要能够考虑顺序数据相互关联性的模型。
+▪ Models can handle sequential data through various techniques and architectures designed to capture the temporal dependencies and patterns within the data.模型可以通过各种技术和架构来处理顺序数据，这些技术和架构旨在捕捉数据中的时间依赖关系和模式。
+▪ Some of these models include:
+
+Recurrent Neural Networks (RNNs)
+Long Short-Term Memory (LSTM) Networks
+Gated Recurrent Units (GRUs)
+Bi-directional Networks
+Transformers
+
+## RNNs
+
+▪ Recurrent Neural Networks (RNNs) are a type of neural network designed for tasks involving sequences or time series data.递归神经网络（RNN）是一种专为涉及序列或时间序列数据的任务而设计的神经网络。
+▪ Unlike traditional feedforward neural networks, RNNs have connections that loop back on themselves, allowing them to maintain memory of previous inputs.与传统的前馈神经网络不同，RNN 具有自我循环的连接，使其能够保持对先前输入的记忆。
+▪ RNNs can model dependencies over time, making them great for tasks like language translation, speech recognition, and predicting future values in a time series.RNN 可以模拟随时间变化的依赖关系，因此非常适合语言翻译、语音识别和预测时间序列中的未来值等任务。
+
+Each RNN unit computes a new hidden state using the previous state and a new input. 每个 RNN 单元利用之前的状态和新的输入计算出一个新的隐藏状态。
+
+\[
+    ℎ_𝑡 = 𝑔(𝑥_𝑡, ℎ_{𝑡−1})
+\]
+
+Each RNN unit (optionally) makes an output using the current hidden state.每个 RNN 单元（可选）利用当前的隐藏状态进行输出。
+
+\[
+    𝑦_𝑡 = 𝑓(ℎ_𝑡)
+\]
+
+Hidden states ℎ𝑡∈𝑅𝐷 are continuous vectors隐藏状态𝑡∈𝑅𝐷是连续向量
+– Can represent very rich information可以表示非常丰富的信息
+– Possibly the entire history from the beginning可能代表从一开始的整个历史
+▪ Parameters are shared (tied) across all RNN units (unlike feedforward NNs).所有 RNN 单元共享（绑定）参数（与前馈 NN 不同）。
+
+![alt text](image-104.png)
+
+![alt text](image-105.png)
+
+Vanilla RNN is the simplest form of a recurrent neural network.Vanilla RNN 是递归神经网络的最简单形式。
+
+### Recurrent Neural Networks (Activation Functions)递归神经网络（激活函数）
+
+Sigmoid
+
+\[
+    σ (𝑥) = \frac{1}{1 + 𝑒^{−𝑥}}
+\]
+\[
+    𝜎′(𝑥) = σ (𝑥) (1- σ( 𝑥 ))
+\]
+
+▪ Often used for gates, and output layer for classification通常用于门，输出层用于分类
+▪ Pros: Non-linear, smooth gradient非线性、平滑梯度
+▪ Cons: Not zero-centered, vanishing gradients不以零为中心，梯度消失
+
+![alt text](image-106.png)
+
+Tanh
+
+▪ Used for hidden states & cells in RNNs, LSTMs.用于 RNN 和 LSTM 的隐藏状态和单元。
+▪ Pros: Zero-centred, often converges faster than sigmoid.零中心，收敛速度通常比 sigmoid 快。
+▪ Cons: Also suffer from vanishing gradients.也有梯度消失的问题。
+
+\[
+    tanh (𝑥) = \frac{𝑒^{𝑥} - 𝑒^{−𝑥}}{𝑒^{𝑥} + 𝑒^{−𝑥}}
+\]
+\[
+    tanh′(𝑥) = 1 - tanh^2(x)
+\]
+\[
+    tanh(𝑥) = 2σ(2x) - 1
+\]
+
+![alt text](image-107.png)
+
+### Recurrent Neural Networks – Classifier
+
+▪ Follows a sequence-to-one architecture.遵循序列到一架构。
+▪ Input: A sequence.
+▪ Output: One Label (A classification).
+▪ Use Case: Sentiment Analysis.
+
+\[
+    ℎ_𝑡 = 𝑔(𝑥_𝑡, ℎ_{𝑡−1})
+\]
+\[
+    𝑦 = 𝑓(ℎ_𝑛)
+\]
+
+![alt text](image-108.png)
+
+### Recurrent Neural Networks – One to Seq
+
+Follows a one-to-sequence architecture 遵循一对一序列结构
+▪ Input: One item
+▪ Output: A sequence
+▪ Use Case: Image Captions图像标题
+
+\[
+    ℎ_𝑡 = 𝑔(𝑥_𝑡, ℎ_{𝑡−1})
+\]
+\[
+    𝑦_t = 𝑓(ℎ_t)
+\]
+
+![alt text](image-109.png)
+
+### Recurrent Neural Networks – Seq to Seq
+
+▪ Follows a sequence-to-sequence architecture遵循序列到序列架构
+▪ Input: A sequence
+▪ Output: A sequence
+▪ Use Case: POS tagging, Named Entity Recognition
+
+\[
+    ℎ_𝑡 = 𝑔(𝑥_𝑡, ℎ_{𝑡−1})
+\]
+\[
+    𝑦_t = 𝑓(ℎ_t)
+\]
+
+![alt text](image-110.png)
+
+Recurrent Neural Networks – Limitations
+
+▪ Vanishing Gradients: RNNs can struggle with long sequences because gradients can become too small, making it hard to learn from distant past information.梯度消失： RNN 在处理长序列时可能会遇到困难，因为梯度可能会变得太小，从而难以从遥远的过去信息中学习。
+▪ Exploding Gradients: Conversely, gradients can become too large, causing unstable training.梯度爆炸： 相反，梯度会变得过大，导致训练不稳定。
+▪ Memory Limitations: RNNs have limited short-term memory and may not remember relevant information from very early in a sequence due to Vanishing Gradients.记忆限制： 由于梯度消失，RNN 的短期记忆有限，可能无法记住序列早期的相关信息。
+
+![alt text](image-111.png)
+
+## Long Short-Term Networks
+
+▪ LSTM, short for Long Short-Term Memory, is a type of RNN architecture.LSTM 是长短时记忆的简称，是一种 RNN 架构。
+▪ Designed to address the vanishing gradient problem in RNNs.旨在解决 RNN 中的梯度消失问题。
+▪ LSTMs incorporate unique gating mechanisms, including forget, input, and output gates, which allow them to regulate the flow of information and avoid the vanishing gradient problem common in standard RNNs.LSTM 具有独特的门控机制，包括遗忘门、输入门和输出门，可以调节信息流，避免标准 RNN 中常见的梯度消失问题。
+▪ RNNs can struggle with long sequences, where information from early time steps may become difficult to capture. LSTMs overcome this limitation.RNN 在处理长序列时可能会遇到困难，因为早期时间步的信息可能难以捕捉。LSTM 克服了这一限制。
+![alt text](image-113.png)
+![alt text](image-112.png)
+
+### LSTM – Cell States
+
+▪ Cell States represent long term memory.细胞状态代表长期记忆。
+▪ The cell state is modulated by three gates (forget, input, and output), which selectively add, retain, or remove information, thereby preventing the gradients from vanishing during long sequences.细胞状态由三个门（遗忘、输入和输出）调制，这三个门可选择性地添加、保留或删除信息，从而防止梯度在长序列中消失。
+▪ Cell states enable LSTMs to capture and retain long-term dependencies.细胞状态使 LSTM 能够捕捉和保留长期依赖关系。
+
+![alt text](image-114.png)
+
+### LSTM – Forget Gates
+
+▪ Decides what long term information should be kept in the cell state.决定应在单元状态中保留哪些长期信息。
+▪ Information from previous hidden state and current input passed through sigmoid function.上一个隐藏状态和当前输入的信息通过 sigmoid 函数传递。
+
+![alt text](image-115.png)
+
+▪ Output closer to 0 means forget, close to 1 means keep.输出接近 0 表示遗忘，接近 1 表示保留。
+▪ Equation given by:
+
+\[
+    𝑓_𝑡 = 𝜎(𝑊_𝑓 ∙ [ℎ_{𝑡−1}, 𝑥_𝑡] + 𝑏_𝑓)
+\]
+
+![alt text](image-116.png)
+
+### LSTM – Input Gates
+
+▪ Decides what new information to add to the cell state.决定将哪些新信息添加到细胞状态中。
+▪ First, a sigmoid layer decides which value to update and how much to update.首先，一个 sigmoid 层决定更新哪个值以及更新多少。
+▪ Next, a tanh layer scales the input between 1 and -1.接下来，一个 tanh 层在 1 和 -1 之间对输入进行缩放。
+![alt text](image-117.png)
+▪ Combine them to create an update to the state of the long term memory.将它们结合起来，创建对长期记忆状态的更新。
+▪ The input gate formula is given by:
+
+\[
+    𝑖_𝑡 = 𝜎(𝑈^{(𝑖)} 𝑥_𝑡 + 𝑊^{(𝑖)} ℎ_{𝑡−1} + 𝑏^{(𝑖)})
+\]
+
+▪ The equation for temporary new cell content is given by:临时新单元格内容的方程为
+
+\[
+    \bar 𝑐_𝑡 = tanh(𝑈^{(c)} 𝑥_𝑡 + 𝑊^{(c)} ℎ_{𝑡−1} + 𝑏 ^{(c)} )
+\]
+
+![alt text](image-118.png)
+
+### LSTM – Cell State Update
+
+▪ The cell state is updated by a combination of the results from the forget gate and the input gate.单元状态由遗忘门和输入门的结果组合更新。
+▪ The updated cell content is given by the equation:
+
+\[
+    𝑐_𝑡 = 𝑓_𝑡𝑐_{𝑡−1} + 𝑖_𝑡 \bar 𝑐_𝑡
+\]
+
+![alt text](image-119.png)
+
+### LSTM – Output Gates
+
+▪ The output gate determines which parts of the cell state are used to generate the output at the current time step.输出门决定单元状态的哪些部分用于生成当前时间步的输出。
+▪ The sigmoid layer decides how the current input and hidden state contribute to the output.sigmoid 层决定当前输入和隐藏状态对输出的贡献。
+▪ The cell state passes through tanh function for normalisation.单元状态通过 tanh 函数进行归一化。
+▪ The two outputs are multiplied to produce the final output.两个输出相乘产生最终输出。
+▪ The output gate equation is given by:
+
+\[
+    𝑜_𝑡 = 𝜎(𝑈^{(𝑜)} 𝑥_𝑡 + 𝑊^{(𝑜)} ℎ_{𝑡−1} + 𝑏^{(𝑜)})
+\]
+
+▪ The hidden state is given by:
+
+\[
+    ℎ_𝑡 = 𝑜_𝑡tanh(𝑐_𝑡)
+\]
+
+![alt text](image-120.png)
+
+## GRUs
+
+▪ Gated Recurrent Units (GRUs) were introduced in 2014 as a simplified variant of LSTM.作为 LSTM 的简化变体，门控循环单元（GRU）于 2014 年问世。
+▪ They aim to achieve similar results with a reduced number of gates and parameters.它们旨在通过减少门的数量和参数来实现类似的结果。
+▪ GRUs do not have a separate cell state like LSTMs, and they merge the roles of the cell state and hidden state.GRU 不像 LSTM 那样有单独的单元态，它们合并了单元态和隐藏态的作用。
+▪ As a result, they are computationally less expensive.因此，它们的计算成本更低。
+▪ A GRU has two fundamental components:
+
+Update Gate:
+Controls the extent to which the previous hidden state is updated.控制上一个隐藏状态的更新程度。
+
+Reset Gate:
+Controls the extent to which the previous hidden state is reset, allowing it to forget some information.控制重置前一个隐藏状态的程度，使其能够遗忘某些信息。
+
+### GRUs – Reset Gates
+
+▪ The reset gate, denoted as 𝑟𝑡 determines how much of the previous hidden state ℎ𝑡−1 should be forgotten.复位门（𝑟𝑡）决定了前一个隐藏状态 𝑡-1 的遗忘程度。
+▪ The information from the previous hidden state and the current input passes through a sigmod:来自前一个隐藏状态和当前输入的信息会经过一个 sigmod：
+
+\[
+    𝑟_𝑡 = 𝜎(𝑊_𝑟 ∙ [ℎ_{𝑡−1}, 𝑥_𝑡] + 𝑏_𝑟)
+\]
+
+▪ The result scales the previous hidden state.结果会对之前的隐藏状态进行缩放。
+▪ The modified previous hidden state is then combined with current input and passes through a tanh to produce a candidate hidden state ℎ𝑡.修改后的前一个隐藏状态与当前输入相结合，并通过 tanh 生成候选隐藏状态 𝑡。
+
+![alt text](image-121.png)
+
+### GRUs – Update Gates
+
+▪ The update gate, denoted as 𝑧𝑡 determines how much of the previous hidden state ℎ𝑡−1 should be retained and how much of the new candidate hidden state ℎ𝑡 should be added to the current state.更新门（表示为 𝑧𝑡 ）决定了应保留多少先前的隐藏状态 𝑠𝑡-1 以及应将多少新的候选隐藏状态 𝑠𝑡 添加到当前状态。
+▪ The formula for the update gate is given by:
+
+\[
+    z_𝑡 = 𝜎(𝑊_z ∙ [ℎ_{𝑡−1}, 𝑥_𝑡] + 𝑏_z)
+\]
+
+▪ The final new hidden state is scaled combination of the previous hidden state and the new candidate hidden state.最终的新隐藏状态是前一个隐藏状态和新的候选隐藏状态的缩放组合。
+
+## Bi-Directional RNNs
+
+▪ Bi-Directional RNNs consist of two separate RNNs: one moving forward through the input sequence and the other moving backward.双向 RNN 由两个独立的 RNN 组成：一个通过输入序列向前移动，另一个向后移动。
+▪ Bi-Directional RNNs are especially useful in applications where understanding the context from both past and future data points in a sequence is crucial.双向 RNN 在理解序列中过去和未来数据点的上下文至关重要的应用中特别有用。
+▪ LSTM and GRU are commonly used in Bi-RNNs.LSTM 和 GRU 通常用于双向 RNN。
+
+![alt text](image-122.png)
+
+Summary
+▪ Sequential data: Data that is chronologically ordered. Textual data falls under this category.顺序数据： 按时间顺序排列的数据。文本数据就属于这一类
+– How traditional models fail to capture this sequential nature due to a lack of memory.由于内存不足，传统模型无法捕捉这种顺序性。
+
+▪ Models that handle sequential data:
+– RNNS:
+A neural network for processing sequential data, capturing temporal information through its internal state.处理顺序数据的神经网络，通过其内部状态捕捉时间信息。
+– LSTMS:
+An advanced RNN variant designed to learn long-term dependencies using special structures called gates.一种先进的 RNN 变种，旨在使用称为门的特殊结构来学习长期依赖关系。
+– GRUs:
+A streamlined version of LSTM with a simpler architecture, combining several gates for efficient learning of dependencies in sequences.LSTM 的精简版，结构更简单，结合了多个门，可高效学习序列中的依赖关系。
+– Bi-RNNs:
+An RNN that processes data in both forward and backward directions to capture context from the entire sequence.一种 RNN，可在前向和后向处理数据，以捕捉整个序列的上下文。
+
+# Week 7
+
+## Seq2Seq Models
+
+▪ Sequence-to-sequence (Seq2Seq) models are models that take a sequence of items (words, letters, features of an images…etc) and outputs another sequence of items.序列到序列（Seq2Seq）模型是将一个项目序列（单词、字母、图像特征......等）转换为另一个项目序列的模型。
+
+![alt text](image-123.png)
+
+▪ Seq2Seq models follow an encoder-decoder architecture.Seq2Seq 模型采用编码器-解码器架构。
+▪ The encoder processes the input sequence step by step, typically using RNN or more advanced models like LSTMs or GRUs.编码器通常使用 RNN 或更先进的模型（如 LSTM 或 GRU）逐步处理输入序列。
+▪ A context vector that captures the input meaning is generated by the encoder.编码器生成能捕捉输入含义的上下文向量。
+▪ The decoder takes the context vector produced by the encoder and uses it to generate the output sequence.解码器接收编码器生成的上下文向量，并用它来生成输出序列。
+
+![alt text](image-124.png)
+
+## Attention Mechanism
+
+▪ Seq2Seq models often experience an information bottleneck in the context vectors.Seq2Seq 模型经常会遇到上下文向量的信息瓶颈。
+▪ As the length of the input sequence increases, it becomes increasingly difficult for the context vector to retain all the relevant information, leading to a degradation in the performance of the model.随着输入序列长度的增加，上下文向量越来越难以保留所有相关信息，从而导致模型性能下降。
+▪ LSTMs and GRUs are not sufficient to capture dependencies in very long sequences.LSTM 和 GRU 不足以捕捉超长序列中的依赖关系。
+▪ Attention mechanism resolves this problem by allowing the model to focus on the relevant parts of an input sequence.注意机制允许模型关注输入序列的相关部分，从而解决了这一问题。
+
+![alt text](image-125.png)
+
+▪ The general attention mechanism makes use of three main components namely the queries (𝑄), the keys (𝐾) and the values (𝑉).一般关注机制由三个主要部分组成，即查询 (𝑄)、键 (绊) 和值 (𝑉)。
+▪ The general attention mechanism then performs the following computations:然后，一般注意力机制会执行以下计算：
+▪ Each query vector, 𝑞 = 𝑠𝑡−1, is matched against a database of keys to compute a score value. This matching operation is computed as the dot product of the specific query under consideration with each key vector, 𝑘𝑖.每个查询向量（△ = 𝑠𝑡-1）都要与密钥数据库进行匹配，以计算得分值。这一匹配操作的计算方法是，将正在考虑的特定查询与每个密钥向量𝑘𝑖进行点乘。
+
+\[
+    𝑒_{𝑞,𝑘𝑖} = 𝑞 ∙ 𝑘_𝑖
+\]
+▪ The scores are passed through a softmax operation to generate the weights:分数通过软最大运算生成权重：
+
+\[
+    𝛼_{𝑞,𝑘𝑖} = 𝑠𝑜𝑓𝑡𝑚𝑎𝑥(𝑒𝑞,𝑘𝑖 )
+\]
+▪ The generalised attention is then computed by a weighted sum of the value vectors, 𝑣𝑘𝑖 , where each value vector is paired with a corresponding key:然后通过值向量的加权和𝑣𝑘𝑖来计算广义注意力，其中每个值向量都与相应的关键字配对：
+
+\[
+    𝒂𝒕𝒕𝒆𝒏𝒕𝒊𝒐𝒏 (𝒒, 𝑲, 𝑽) = \sum_i{𝜶_{𝒒,𝒌𝒊} 𝒗_{𝒌𝒊}}
+\]
+
+▪ When the generalized attention mechanism is presented with a sequence of words:当泛化注意力机制看到一串单词时：
+– The query vector attributed to some specific word in the sequence is scored against each key in the database. 根据数据库中的每个关键字，对序列中某个特定单词的查询向量进行评分。
+– In doing so, it captures how the word under consideration relates to the others in the sequence.这样，它就能捕捉到所考虑的单词与序列中其他单词之间的关系。
+– The values are then scaled according to the attention weights (computed from the scores) to retain focus on those words relevant to the query.然后根据关注度权重（根据分数计算得出）对这些值进行缩放，以便将注意力集中在与查询相关的单词上。
+– An attention output for the word under consideration is then produced.然后，就会产生所考虑的词的关注度输出。
+
+▪ Scores are computed using each of encoder hidden state (keys) and the current decoder hidden state (query).使用编码器隐藏状态（密钥）和当前解码器隐藏状态（查询）计算分数。
+▪ The scores are passed through a softmax function to obtain normalised attention weights.通过软最大函数计算得分，以获得归一化的注意力权重。
+▪ The attention weights obtained from the softmax operation are used to calculate a weighted sum of the encoder hidden states.从软最大运算中获得的注意力权重用于计算编码器隐藏状态的加权和。
+▪ This weighted sum is then used to provide context information to the decoder for the current time step.这个加权和将用于为解码器提供当前时间步的上下文信息。
+▪ This sum is concatenated with the input to the decoder at the current time step. The concatenated vector is then used as input to the decoder's recurrent unit.该和与当前时间步长的解码器输入相串联。然后，合并后的矢量被用作解码器递归单元的输入。
+
+▪ Scores are computed using each of encoder hidden state (keys) and the current decoder hidden state (query).使用编码器隐藏状态（密钥）和当前解码器隐藏状态（查询）计算分数。
+▪ The scores are passed through a softmax function to obtain normalised attention weights.通过软最大函数计算得分，以获得归一化的注意力权重。
+▪ The attention weights obtained from the softmax operation are used to calculate a weighted sum of the encoder hidden states.从软最大运算中获得的注意力权重用于计算编码器隐藏状态的加权和。
+▪ This weighted sum is then used to provide context information to the decoder for the current time step.这个加权和将用于为解码器提供当前时间步的上下文信息。
+▪ This sum is concatenated with the input to the decoder at the current time step. The concatenated vector is then used as input to the decoder's recurrent unit.该和与当前时间步长的解码器输入相串联。然后，合并后的矢量被用作解码器递归单元的输入。
+
+![alt text](image-126.png)
+
+## Transformer Models
+
+▪ Transformers are a type of deep learning architecture introduced in the paper "Attention Is All You Need" by Vaswani et al. in 2017.是 Vaswani 等人在 2017 年发表的论文《Attention Is All You Need》中介绍的一种深度学习架构。
+▪ RNNs, LSTMs and GRUs all face challenges when dealing with long-range dependencies in sequences.RNN、LSTM 和 GRU 在处理序列中的长程依赖关系时都面临挑战。
+▪ We have seen that attention mechanism can help address the long-range issue.我们看到，注意力机制有助于解决长程问题。
+▪ Given that attention gives us access to any state, do we still need the underlying RNNs (or LSTMs or GRUs)? Or can we build something simpler based on the attention mechanism?既然注意力能让我们访问任何状态，我们还需要底层的 RNN（或 LSTM 或 GRU）吗？还是说我们可以在注意力机制的基础上构建更简单的机制？
+
+▪ Transformers are sequence-to sequence encoder-decoder models.变换器是序列到序列的编码器-解码器模型。
+▪ Uses attention mechanisms to weigh the importance of different elements in the input sequence.使用注意力机制来权衡输入序列中不同元素的重要性。
+▪ Transformer models have the following key components:变换器模型有以下主要组成部分：
+
+Input Embeddings
+convert input tokens into embeddings将输入标记转换为嵌入
+Positional Encoding
+add positional information to embeddings为嵌入词添加位置信息
+Multi-Head Self-Attention
+compute attention scores across different positions计算不同位置的注意力分数
+
+Encoder Layers:
+– Multi-Head Self-Attention: Compute attention scores across different positions多头自我注意力 计算不同位置的注意力分数
+– Feed-Forward Neural Network: Processes the output from the self-attention mechanism前馈神经网络 处理来自自我注意机制的输出
+– Residual Connection & Layer Normalisations: Applied after self-attention and after the feed-forward network剩余连接和层归一化： 在自我注意和前馈网络之后应用
+
+Decoder Layers:
+– Masked Self-Attention: Prevents positions from attending to subsequent positions.屏蔽自关注： 防止位置关注后续位置。
+– Encoder-Decoder Attention: Focuses on relevant parts of the input sequence.编码器-解码器关注： 关注输入序列的相关部分。
+
+### Transformer Models – Encoder
+
+The input to encoder setup is as follows:
+▪ The input is first converted into an embedding.首先将输入转换为嵌入。
+▪ This is followed by a positional encoding layer.然后是位置编码层。
+▪ The encoder layer consist of multi-head self-attention.编码器层由多头自注意力组成。
+▪ Followed by a feedforward neural network.之后是前馈神经网络
+▪ Normalisation is done in the Add & Norm steps.在添加和规范步骤中进行规范化。
+▪ This encoder layer can be stacked multiple times depending on complexity of the task根据任务的复杂程度，该编码器层可堆叠多次
+▪ In the original paper, the encoder layer is stacked 6 times.在原始论文中，编码器层被堆叠了 6 次。
+
+![alt text](image-127.png)
+
+### Transformer Models – Positional Encodings
+
+▪ Since Transformer models do not inherently process sequences in order (like RNNs or LSTMs), positional encodings are added to input embeddings to give the model information about the position of each token in the sequence.由于变换器模型本身并不按顺序处理序列（如 RNN 或 LSTM），因此位置编码被添加到输入嵌入中，以便为模型提供序列中每个标记的位置信息。
+▪ Positional encodings ensure that each position in the sequence has a unique representation.位置编码确保序列中的每个位置都有唯一的表示。
+▪ Positional encodings are added to the token embeddings. This combination allows the model to process both the content of the tokens and their positions in the sequence simultaneously.位置编码被添加到标记嵌入中。这种组合使模型能够同时处理标记的内容及其在序列中的位置。
+▪ In the original paper, positional encodings are created using sinusoidal functions of different frequencies, ensuring that each position generates a unique encoding and that these encodings are consistent across different sequence lengths.在最初的论文中，位置编码是使用不同频率的正弦函数创建的，以确保每个位置都能生成唯一的编码，并且这些编码在不同长度的序列中保持一致。
+
+![alt text](image-128.png)
+
+▪ The complete transformer block has two sublayers:
+– Multi-head Self-Attention: - 多头自关注：Processes input by attending to different positions of the sequence simultaneously in multiple representational subspaces.通过在多个表征子空间中同时关注序列的不同位置来处理输入。
+– Feedforward neural network前馈神经网络: Applies two linear transformations with an activation function in between to each position, enhancing the representation independently for each position.对每个位置应用两个线性变换，中间有一个激活函数，对每个位置独立增强表征。
+▪ Each of these two sublayers also has:这两个子层中的每个子层还具有
+– Residual connection: Facilitates deeper model architectures and mitigating the vanishing gradient problem.残余连接： 促进更深层次的模型架构，缓解梯度消失问题。
+– Layer Normalisation: Normalises the output of each sublayer层归一化： 将每个子层的输出归一化
+post-residual connection, stabilizing and accelerating the training process.剩余连接后的输出归一化，从而稳定并加速训练过程。
+
+### Transformer Models – Self Attention
+
+▪ Self-attention operates on a single sequence, allowing each position in the sequence to attend to all other positions within the same sequence.自我注意在单个序列上运行，允许序列中的每个位置注意同一序列中的所有其他位置。
+▪ This contrasts with general attention mechanisms, which often involve attending to a different sequence (like in seq2seq models where the decoder attends to the encoder's output).这与一般的注意机制形成鲜明对比，后者通常涉及对不同序列的注意（如在 seq2seq 模型中，解码器注意编码器的输出）。
+▪ Specifically, key, query, and value all come directly from the same input sequence.具体来说，键、查询和值都直接来自同一输入序列。
+▪ Each query is compared to all keys (including itself) using a dot product operation to compute attention scores, indicating the relevance of each key to the query.使用点乘运算将每个查询与所有关键字（包括其本身）进行比较，以计算关注度分数，表明每个关键字与查询的相关性。
+▪ The scores can be scaled by a factor, typically the square root of the dimension of the key vectors, to control the magnitude of the scores.分数可以用一个因子缩放，通常是密钥向量维度的平方根，以控制分数的大小。
+▪ These scores are then normalised (typically using a softmax function) and used to create a weighted sum of the values.然后对这些分数进行归一化处理（通常使用 softmax 函数），并用于创建数值的加权和。
+
+This self-attention allows the model to register the following:这种自我关注使模型能够记录以下内容：
+▪ The animal didn’t cross the street because it was too tired.
+▪ Self-attention allows the model to associate the “it” in the sentence with the word “animal”.自我注意让模型将句子中的 “它 ”与 “动物 ”联系起来。
+
+![alt text](image-129.png)
+
+![alt text](image-130.png)
+
+▪ To calculate the self-attention for the first word in this example, “Thinking”.计算本例中第一个单词 “思考 ”的自我关注度。
+▪ We need to score each word of the input sentence against this word.我们需要对输入句子中的每个单词进行评分。
+▪ The score determines how much focus to place on other parts of the input sentence as we encode a word at a certain position.分数决定了我们在某个位置编码某个单词时，对输入句子其他部分的关注程度。
+▪ The score is calculated by taking the dot product of the query vector with the key vector of the respective word that we are scoring.分数的计算方法是将查询向量与我们要评分的各个单词的关键向量进行点乘。
+
+![alt text](image-131.png)
+
+▪ The scores are then divided by 8, to allow for more stable gradients.然后将分数除以 8，以获得更稳定的梯度。
+▪ The result is passed through a softmax operation.将结果通过软最大运算。
+▪ Softmax normalises the scores so they’re all positive and add up to 1.Softmax 对分数进行归一化处理，使其全部为正值，加起来等于 1。
+▪ The softmax score determines how much each word will be expressed at this position.Softmax 分数决定了每个单词在该位置的表达量。
+
+![alt text](image-132.png)
+
+▪ Multiply each value vector by the softmax score.将每个值向量乘以 softmax 分数。
+▪ Keep intact the values of the word(s) we want to focus on and drown-out irrelevant words.保留我们想要关注的单词的值，忽略不相关的单词。
+▪ Sum up the weighted value vectors. This produces the output of the self-attention layer at this position for the first word.将加权值向量相加。这将产生自我关注层在此位置对第一个单词的输出。
+
+### Transformer Models – Multi Head Attention
+
+▪ Parallel Attention Heads: Executes several self-attention mechanisms (attention heads) in parallel, allowing the model to capture different relationships in the data simultaneously.平行注意头： 并行执行多个自我注意机制（注意头），使模型能够同时捕捉数据中的不同关系。
+▪ Diverse Representations: Each head can learn distinct aspects of the input, providing a more comprehensive understanding of the sequence.多种表征： 每个注意头都能学习输入的不同方面，从而提供对序列更全面的理解。
+▪ Concatenation and Transformation: Outputs of all heads are concatenated and linearly transformed to produce the final attention output.▪ 连接和转换： 所有头部的输出都经过串联和线性变换，以产生最终的注意力输出。
+▪ Enhanced Capacity: Increases the model's capacity and expressiveness without significantly raising computational complexity.增强容量： 在不显著提高计算复杂度的情况下，提高模型的容量和表现力。
+
+![alt text](image-133.png)
+
+### Transformer Models – Decoder
+
+▪ The decoder in the transformer contains 3 layers:
+– Masked multi-head self-attention.屏蔽多头自我注意。
+– Encoder-decoder attention.编码器-解码器注意。
+– Feed-forward neural network.前馈神经网络
+▪ Similar to the encoder, each of the sublayers also has:
+– Residual connection剩余连接
+– Layer Normalisation层归一化
+▪ In the original paper, the decoder blocks are also repeated 6 times.在原始论文中，解码器块也重复了 6 次
+▪ Finally, the results go through a linear layer and softmax to generate the final output probabilities.最后，结果经过线性层和 softmax 生成最终输出概率
+
+![alt text](image-134.png)
+
+▪ Masked multi-head self-attention:
+– Allows each position in the decoder to attend to all positions up to and including that position in the decoder sequence.允许解码器中的每个位置关注解码器序列中包括该位置在内的所有位置。
+– The masking prevents positions from attending to subsequent positions, maintaining the auto-regressive property.屏蔽可防止位置关注后续位置，从而保持自动回归特性。
+▪ Encoder-Decoder Attention:
+– Allows the decoder to focus on different parts of the input sequence.允许解码器关注输入序列的不同部分。
+– It's similar to multi-head self-attention but the queries come from the previous decoder layer, and the keys and values come from the output of the encoder stack.它类似于多头自注意，但查询来自前一个解码器层，而键和值来自编码器堆栈的输出。
+
+Summary
+
+▪ Sequence-to-Sequence (Seq2Seq) Model:
+A neural network architecture designed for converting sequences from one domain to sequences in another domain, commonly used in tasks like machine translation.
+▪ Transformer Models:
+– Utilise self-attention mechanisms to process entire input sequences simultaneously, providing efficiency and effectiveness in capturing long-range dependencies.
+– Feature an encoder-decoder architecture with multi-head attention, allowing the model to capture a diverse range of information and relationships within the data.
+– Do not rely on recurrence or convolution, making them well-suited for parallel processing and handling sequences with complex structures.
+▪ Attention Mechanisms:
+– A mechanism that allows neural networks to focus on different parts of input sequences when making predictions, enhancing their ability to capture and utilize relevant information.
+– Resolves the performance issue on long sequences that plagues RNNs and LSTMS.
+
+序列到序列（Seq2Seq）模型：
+一种神经网络架构，设计用于将一个领域的序列转换为另一个领域的序列，常用于机器翻译等任务。
+
+转换器模型：
+- 利用自我注意机制同时处理整个输入序列，在捕捉长距离依赖关系方面提供高效率和有效性。
+- 采用多头注意的编码器-解码器架构，使模型能够捕捉数据中的各种信息和关系。
+- 不依赖递归或卷积，因此非常适合并行处理和处理具有复杂结构的序列。
+
+注意机制：
+- 这种机制允许神经网络在进行预测时关注输入序列的不同部分，从而提高捕捉和利用相关信息的能力。
+- 解决了困扰 RNN 和 LSTMS 的长序列性能问题。
