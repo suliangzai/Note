@@ -1,7 +1,452 @@
 # Week 1
 
+What is NLP?
+
+NLP represents a facet of artificial intelligence focussed on examining, comprehending, and producing human languages as they are naturally spoken and written.NLP 代表了人工智能的一个方面，其重点是检查、理解和生成人类语言的自然口语和书面语。
+
+Serves as a bridge between human language and computers. Some key purposes include:是人类语言和计算机之间的桥梁。一些主要用途包括
+
+Language Understanding
+Allowing computers comprehend the meaning and context of human language.
+
+Language Generation
+Enabling Computers to generate human-like text or speech.
+
+Sentiment Analysis
+Analysing the sentiment or emotion behind written text or spoken words.
+
+Machine Translation
+Facilitating the automatic translation of text from one language to another.
+
+A Brief History of NLP
+
+![alt text](image-135.png)
+
+Approaches to NLP
+
+Symbolic
+Rule based approach, based on lexica and semantics.基于规则的方法，以词法和语义为基础。
+
+Stochastic
+Probabilistic language models. Examples include N-grams, Bayes Theorem, K-Means概率语言模型。例如 N-grams、贝叶斯定理、K-Means 等。
+
+Neural Model
+Neural network approach to NLP. Examples include BERT, LSTMs, GCNs etc.神经网络 NLP 方法。例如 BERT、LSTM、GCN 等。
+
+Preprocessing Techniques
+
+Why do we need them?
+
+NOISE REDUCTION
+Remove special characters, punctuation, and irrelevant information to clean the data.去除特殊字符、标点符号和无关信息，以净化数据。
+
+TOKENIZATION
+Break text into smaller units (words/subwords) for better analysis.将文本分解成更小的单元（单词/子单词），以便更好地进行分析。
+
+NORMALIZATION
+Standardise words (lowercase, stemming, lemmatization) for reduced vocabulary size.将单词标准化（小写、词干、词素化），以减少词汇量。
+
+STOP WORD REMOVAL
+Eliminate common words with little semantic value to reduce noise.删除语义价值不高的常用词，以减少噪音。
+
+HANDLING OOV WORDS
+Replace out-of-vocabulary words with unknown tokens or use subword tokenization.用未知标记词替换词汇量不足的词，或使用子词标记化。
+
+SENTENCE SEGMENTATION
+Separate text into sentences for individual analysis.将文本分成句子，以便进行单独分析。
+
+FEATURE ENGINEERING
+Extract linguistic features (n-grams, POS tags) to enhance understanding.提取语言特征（n-grams、POS 标记）以增强理解。
+
+## Preprocessing Techniques – RegEx
+
+Regular Expressions (RegEx)正则表达式 
+
+A string of text that lets you create patterns that help match, locate, and manage text.一串文本，让你创建模式，帮助匹配、定位和管理文本。
+
+Example
+Find the following strings within a block of text:在一个文本块中查找以下字符串：
+▪ pomeranian
+▪ pomeranians
+▪ Pomeranian
+▪ Pomeranians
+
+Metacharacters
+Metacharacters are characters that serve special functions within a RegEx.元字符是在 RegEx 中具有特殊功能的字符。
+
+Special Sequences
+A special sequence is a \ followed by a character that match a specific set of characters.特殊序列是指后面跟有匹配特定字符集的字符。
+
+Sets
+A set is a set of characters inside a pair of square brackets [ ] with a special meaning集合是指一对方括号[ ]内的一组字符，具有特殊含义
+
+![alt text](image-136.png)
+
+![alt text](image-137.png)
+
+![alt text](image-138.png)
+
+Some examples:
+
+![alt text](image-139.png)
+
+RegEx Functions
+
+![alt text](image-140.png)
+
+## Preprocessing Techniques – NLTK
+
+Natural Language Toolkit (NLTK)自然语言工具包
+
+▪ NLTK(Natural Language Toolkit) is the primary python API for NLP.NLTK（自然语言工具包）是用于 NLP 的主要 Python 应用程序接口。
+▪ Contains useful functions for preprocessing, which will be covered later.包含有用的预处理函数，稍后将介绍。
+▪ Examples include:
+
+Tokenization 
+Stop word removal 
+Lemmatization/Stemming
+Tagging POS(parts of speech)
+
+## Preprocessing Techniques – Tokenization
+
+okenization refers to separating a piece of text into smaller ‘tokens’.标记化是指将一段文本分离成更小的 “标记”。
+Tokens can be words, characters or subwords(n-gram).标记可以是单词、字符或子单词（n-gram）。
+The most common form of tokenization is to use space as a delimiter, resulting in individual words forming tokens.最常见的标记化形式是使用空格作为分隔符，从而使单个词形成标记。
+
+![alt text](image-142.png)
+
+## Preprocessing Techniques – Stemming
+
+It is the process of reducing inflected words to their ‘stem’. For example:它是将转折词还原为 “词干 ”的过程。例如
+
+![alt text](image-143.png)
+
+▪ Stemming removes the last few characters of a given word to obtain a shorter form. (Note, sometimes this form may not carry any meaning, such as the above case.)词干法删除给定单词的最后几个字符，以获得较短的形式。（注意，有时这种形式可能没有任何意义，如上述情况）。
+
+Advantages
+▪ Improved model performance:
+Stemming reduces the number of unique words that the algorithm needs to process.词干化减少了算法需要处理的独特单词数量。
+
+▪ Grouping of similar words:
+Words with a similar meaning can be grouped together even if they possess different forms.即使具有不同的形式，含义相似的词也可以归为一组。
+
+▪ Reduces complexity of text:
+Stemming reduces the size of the vocabulary, hence making texts easier to analyze and understand.词根化减少了词汇量，从而使文本更易于分析和理解。
+
+Disadvantages
+▪ Overstemming:
+The algorithm may reduce unrelated words to the same word stem.算法可能会将不相关的词简化为相同的词干。
+E.g.: university, universal, universe == universi.
+
+▪ Understemming:
+The algorithm does not reduce the word enough, resulting in synonyms bearing different stems.算法对单词的还原不够，导致同义词的词干不同。
+E.g.: alumnus, alumni, alumnae are not reduced to the same stem.
+
+▪ Language Challenges:
+As the target language's morphology, spelling, and character encoding get more complicated, stemmers become more difficult to design.随着目标语言的词形、拼写和字符编码变得更加复杂，词干处理程序的设计也变得更加困难。
+E.g. French, having a larger number of verb inflections, will require a more complicated stemmer than English.法语有更多的动词变位，因此需要比英语更复杂的词干处理程序。
+
+![alt text](image-144.png)
+
+![alt text](image-145.png)
+
+![alt text](image-146.png)
+
+## Preprocessing Techniques – Lemmatization
+
+What is Lemmatization?
+▪ It is the process of reducing inflected words to their ‘lemma’(dictionary form). For example:它是将转折词还原为其 “词形”（词典形式）的过程。例如
+
+![alt text](image-147.png)
+
+As opposed to stemming, lemmatization aims to remove ONLY the inflectional ends of words, returning its dictionary form.与词干化不同，词法化的目的是只去除词的词尾，返回其字典形式。
+
+Advantages
+▪ Accuracy
+As the word’s Part-Of-Speech(POS) is taken into consideration, the word’s context is considered when lemmatizing the word, resulting in a more accurate shortening of the word.由于考虑了单词的语音部分（POS），因此在对单词进行词法化时，会考虑单词的上下文，从而更准确地缩短单词。
+
+Disadvantages
+▪ Time-consuming
+Lemmatization is slow and time-consuming when compared to stemming, as morphological analysis is conducted on each word to derive its meaning.词法化与词干法相比，速度慢且耗时，因为要对每个词进行形态分析以得出其含义。
+
+![alt text](image-148.png)
+
+![alt text](image-149.png)
+
+![alt text](image-150.png)
+
+## Preprocessing Techniques – BOW
+
+Bag-Of-Words (BOW)
+▪ A representation of text that describes the occurrence of words within a document.描述文档中单词出现情况的文本表示法。
+▪ Only word counts are retained, grammatical details and word order are discarded.只保留单词数，语法细节和单词顺序将被舍弃。
+▪ Considered a ‘bag’ as all information about order and grammar are discarded.由于所有语序和语法信息都被丢弃，因此被视为 “词袋”。
+▪ Converts unstructured text into structured data in the form of fixed length vectors.将非结构化文本转换为固定长度向量形式的结构化数据。
+
+![alt text](image-151.png)
+
+![alt text](image-152.png)
+
+![alt text](image-154.png)
+
+![alt text](image-153.png)
+
+![alt text](image-155.png)
+
+有了这些向量，我们就可以对句子进行比较了。
+例如，衡量句子之间相似性的一种方法是这些向量之间的余弦相似性
+
+## Preprocessing Techniques – N-grams
+
+What is N-grams?
+▪ A contiguous sequences of items that are collected from a sequence of text or speech corpus.从一系列文本或语音语料中收集的连续项目序列。
+▪ The ‘n’ in n-grams specify the number of tokens considered.N-grams 中的 “n ”表示所考虑的词块数量。
+
+![alt text](image-156.png)
+
+▪ N-grams are a probabilistic model that computes the probability of sentence or a given sequence of words.N-grams 是一种概率模型，用于计算句子或给定词序列的概率。
+
+\[𝑃(𝑊)=𝑃(𝑤1, 𝑤2, 𝑤3, 𝑤4,…𝑤𝑛) 
+\]
+OR
+\[
+𝑃(𝑤5 | 𝑤1, 𝑤2, 𝑤3, 𝑤4)
+\]
+▪ To compute this probability, we use the chain rule of probability, namely:为了计算这个概率，我们使用概率链规则，即
+\[
+    P(B|A)=\frac{P(A,B)}{P(A)}
+\]
+
+▪ With more variables, this becomes:如果变量越多，这个概率就越大：
+\[
+𝑃(𝐴,𝐵,𝐶,𝐷)=𝑃(𝐴)𝑃(𝐵│𝐴)𝑃(𝐶│𝐴,𝐵)𝑃(𝐷│𝐴,𝐵,𝐶)
+\]
+▪ As these sentences get longer, the computation for these probabilities becomes increasingly difficult.随着句子越来越长，这些概率的计算也越来越困难。
+
+▪ To simplify these probabilities, the Markov Assumption is utilised, namely:为了简化这些概率，我们使用了马尔可夫假设，即
+![alt text](image-157.png)
+
+▪ Intuitively, this means the next word in a sentence can be predicted as a probability based on the n number of words that precedes it.直观地说，这意味着句子中的下一个单词可以根据其前面的 n 个单词的概率来预测。
+
+![alt text](image-158.png)
+
+Key points discussed this week:
+▪ Preprocessing techniques including:
+▪ RegEx:
+A sequence of characters used to match, search, and manipulate patterns in text strings.
+▪ Stemming:
+The process of reducing words to their base or root form to simplify text analysis and improve information retrieval in natural language processing.
+▪ Lemmatization:
+The process of converting words to their base or dictionary form (lemmas) to maintain the grammatical meaning and improve language understanding in natural language processing.
+▪ NLTK:
+A Python library that provides tools and resources for processing and analysing human language data.
+▪ Basic language models including:
+▪ Bag of Words:
+A simple and commonly used text representation model that converts documents into vectors, disregarding grammar and word order, by counting the frequency of each word.
+▪ N-grams:
+Contiguous sequences of n words in a text, used in language modeling and text analysis to capture local context and relationships between words.
+
+预处理技术，包括
+▪ RegEx：
+用于匹配、搜索和处理文本字符串中的模式的字符序列。
+词根处理：
+在自然语言处理中，将单词还原为词基或词根形式，以简化文本分析并改进信息检索的过程。
+词根化：
+在自然语言处理中，将单词转换为词基或词典形式（词素）的过程，以保持语法意义并提高语言理解能力。
+NLTK：
+一个 Python 库，为处理和分析人类语言数据提供工具和资源。
+基本语言模型，包括
+词袋：
+一种简单且常用的文本表示模型，通过计算每个单词的频率，将文档转换为向量，不考虑语法和词序。
+N-grams：
+文本中 n 个单词的连续序列，用于语言建模和文本分析，以捕捉单词之间的局部语境和关系。
 # Week 2
 
+## Information Extraction
+
+Information Extraction Systems:
+▪ Locate and comprehend pertinent sections of text.找到并理解文本的相关部分。
+▪ Summarise useful information across documents.总结文档中的有用信息。
+▪ Produce a structured representation of the information.生成信息的结构化表示。
+
+![alt text](image-159.png)
+
+Goals:
+Information Organisation:
+To organise information in a way that is useful for human understanding以有助于人类理解的方式组织信息
+
+Entity and Relationship Identification:
+To identify the relationship between entities (ie. names/organisations) through their relationships within text通过文本中的关系识别实体（即名称/组织）之间的关系
+
+Generation of Structured Data:
+To put information contained within text into a semantically precise form that allows for further inferences to be made by algorithms将文本中包含的信息转化为语义精确的形式，以便通过算法进行进一步推断
+
+## Named Entity Recognition (NER)
+
+▪ Most important text information lies within named entities.大多数重要的文本信息都包含在命名实体中。
+▪ These include names, locations, companies, dates, etc.这些实体包括姓名、地点、公司、日期等。
+▪ Works by extracting the most important pieces of information from unstructured text.从非结构化文本中提取最重要的信息。
+▪ Delivers critical insights by picking up mentions of certain organisations/people.通过拾取某些组织/人员的提及信息，提供重要的洞察力。
+
+![alt text](image-160.png)
+
+▪ Eg: Google uses NER to retrieve low-level information for certain searches.Google 使用 NER 来检索某些搜索的低级信息。
+
+![alt text](image-161.png)
+
+NER primarily focuses on:
+▪ Organisations组织
+▪ Locations地点
+▪ Dates日期
+▪ Persons人员
+▪ Events活动
+▪ These entities can be adjusted depending on the nature of the task.
+▪ E.g.: A materials-science related model could feature sector-specific entities such as material names, manufacturing processes, etc.
+这些实体可根据任务的性质进行调整。
+例如： 与材料科学相关的模型可以包含特定行业的实体，如材料名称、制造工艺等。
+
+Any NER task needs to accomplish two basic goals:任何 NER 任务都需要实现两个基本目标：
+
+Detecting a named entity.
+Detecting a word or a string of words that form an entity. With each word representing a token, “United Overseas Bank” is a string of three tokens representing one entity.检测构成实体的一个词或一串词。每个单词代表一个标记，“大华银行 ”就是由三个标记组成的字符串，代表一个实体。
+
+Categorising the entity.
+Entity categories need to be created based on the task at hand. Common categories include people, organisation and time. Granular rules need to be created in order to classify these entities into their respective subcategories.需要根据手头的任务创建实体类别。常见的类别包括人员、组织和时间。为了将这些实体归入各自的子类别，需要创建细化规则。
+
+Named Entity Recognition – Using spaCy
+
+![alt text](image-162.png)
+
+![alt text](image-163.png)
+
+![alt text](image-164.png)
+
+Applications
+▪ Performing sentiment analysis toward a company or product.对公司或产品进行情感分析。
+▪ Relations between entities represent a large number of IE relations.实体之间的关系代表了大量的 IE 关系。
+▪ Answer detection – Answers often come in the form of named entities.答案检测--答案通常以命名实体的形式出现。
+▪ Low-level information retrieval – Assists in queries on the nature/history of an entity.低级信息检索--协助查询实体的性质/历史。
+
+## Part-Of-Speech Tagging
+
+ApplicationsWords found in natural languages can be categorised based on their roles and functions within a sentence. Common categories include:应用自然语言中的词语可以根据其在句子中的作用和功能进行分类。常见的类别包括
+• Nouns
+• Verbs
+• Adjectives
+• Adverbs
+• Conjunctions
+
+![alt text](image-165.png)
+
+▪ By analysing the structural and semantic context of words in speech, text can be processed more accurately.通过分析语音中词语的结构和语义上下文，可以更准确地处理文本。
+▪ E.g.: Depending on context, the word ‘run’ can either be a noun or a verb. POS tagging allows computers to contextualise these words for more accurate processing and comprehension.例如 根据上下文，“run ”既可以是名词，也可以是动词。POS 标记 可以让计算机根据上下文对这些单词进行更准确的处理和理解。理解。
+
+![alt text](image-166.png)
+
+▪ POS tagging aims to automate the task of tagging parts-of-speech to determine the syntactic and grammatical role of each word in the context of a sentence.POS 标记旨在自动标记语音部分，以确定每个单词在句子上下文中的句法和语法作用。
+▪ Tagging can be done using linguistic patterns, context and predefined dictionaries.可以使用语言模式、上下文和预定义词典进行标记。
+▪ POS tagging can also be achieved using probability models, such as Hidden Markov Models.POS 标记也可以使用概率模型（如隐马尔可夫模型）来实现。
+
+▪ Hidden Markov Models:
+- HMM (Hidden Markov Model) is a stochastic technique for POS tagging.HMM（隐马尔可夫模型）是一种用于 POS 标记的随机技术
+- Works by leveraging state transitions and observations to determine the most likely sequence for POS tags in a sentence.利用状态转换和观察结果来确定句子中 POS 标记的最可能序列。
+  
+▪ Components of a HMM include:
+- States (Specific POS tags like ‘noun’, verb’, ‘adjective’)状态（“名词”、“动词”、“形容词 ”等特定 POS 标记）
+- Observations (Each observation corresponds to a word in a sentence)观测点（每个观测点对应句子中的一个单词）
+  
+▪ Two sets of probabilities are used:
+- Transition Probability:
+The probability of transitioning from one POS tag to another.从一个 POS 标记过渡到另一个 POS 标记的概率。
+- Emission Probability:
+The probability of a certain word being emitted from a POS tag.某个词从一个 POS 标记发出的概率。
+
+![alt text](image-167.png)
+
+Calculating Emission Probabilities:
+
+![alt text](image-168.png)
+
+Frequency of occurrence:
+
+![alt text](image-169.png)
+
+![alt text](image-170.png)
+
+Define start and end tags as < s > and < e > respectively;将开始和结束标记分别定义为 < s > 和 < e >；
+
+![alt text](image-171.png)
+
+Calculate co-occurrence probability: E.g.: < s > is followed by a noun ¾ times as above.
+
+![alt text](image-172.png)
+
+Calculating Transition Probabilities
+
+![alt text](image-173.png)
+
+By calculating these probabilities, we can determine the most likely tags for words in the sentence.通过计算这些概率，我们可以确定句子中最有可能出现的词语标签。
+
+Probability tree for all possible tags
+
+![alt text](image-174.png)
+
+Optimisation with the Viteribi algorithm:
+
+1. Store all intermediate probabilities for each state transition.存储每个状态转换的所有中间概率。
+
+![alt text](image-175.png)
+
+2. From the endpoint, backtrace the path with the highest probability to the start point.从终点出发，回溯概率最高的路径，到达起点。
+
+![alt text](image-176.png)
+
+![alt text](image-177.png)
+
+![alt text](image-178.png)
+
+Applications:
+▪ Text classification: POS tagging can aid in categorizing texts into various groups, by conducting sentiment analysis. Through the examination of the part-of-speech tags assigned to words within a text, algorithms can better understand the text's subject
+matter.文本分类： 通过进行情感分析，POS 标记可以帮助将文本分为不同的组别。通过检查分配给文本中单词的语音部分标签，算法可以更好地理解文本的主题。
+▪ Machine translation: By identifying the grammatical structure and relationships between words in the source language, and mapping them to the target language, POS tagging can be used to help translate texts.机器翻译： 通过识别源语言中的语法结构和词与词之间的关系，并将其映射到目标语言中，POS 标记可用于帮助翻译文本。
+▪ Natural language generation: POS tagging can be used to generate natural-sounding text by selecting appropriate words and constructing grammatically correct sentences. This is useful for tasks such as chatbots and virtual assistants.自然语言生成： POS 标记可通过选择适当的单词和构建语法正确的句子来生成听起来自然的文本。这对聊天机器人和虚拟助手等任务非常有用。
+
+## Dependency Parsing
+
+▪ Dependency parsing is a natural language processing technique that analyses the grammatical structure of a sentence by identifying the relationships between words.依赖关系解析是一种自然语言处理技术，它通过识别单词之间的关系来分析句子的语法结构。
+▪ Dependency Parsing offers a more detailed analysis of sentence structure compared to other parsing methods.与其他解析方法相比，依赖关系解析能对句子结构进行更详细的分析。
+▪ Enables a deeper understanding of the relationships between words, enhancing context comprehension.可以更深入地理解单词之间的关系，从而提高上下文理解能力。
+
+▪ Dependency parsing identifies which words are the main components (heads) and which words depend on them (modifiers).依赖性解析可确定哪些词是主要成分（词头），哪些词依赖于它们（修饰词）。
+▪ Each relationship is assigned a label (e.g., subject, object, modifier) to indicate the grammatical role of the dependent word in relation to the head word.每种关系都有一个标签（如主语、宾语、修饰语），以表明从属词相对于词头的语法作用。
+▪ These relationships form a tree-like structure, revealing the hierarchical organisation of the sentence.这些关系形成树状结构，揭示了句子的层次组织。
+
+![alt text](image-179.png)
+
+![alt text](image-180.png)
+
+![alt text](image-181.png)
+
+Key points discussed this week:
+▪ Information Extraction Systems including:
+• Named Entity Recognition:
+Process of identifying and categorising specific named entities, such as names, dates, locations, and more, within text.
+▪ Part Of Speech Tagging:
+Assigning grammatical labels to words in a sentence to indicate their syntactic roles and categories, like nouns, verbs, adjectives, etc.
+▪ Dependency Parsing:
+Parsing technique that analyses the syntactic structure of a sentence by identifying the relationships between words, showing how they depend on one another.
+▪ spaCy:
+A Python library that provides tools and resources for information extraction.
+
+信息提取系统，包括
+- 命名实体识别：
+在文本中识别和分类特定命名实体（如姓名、日期、地点等）的过程。
+- 部分语音标记：
+为句子中的词语指定语法标签，以表明其句法作用和类别，如名词、动词、形容词等。
+- 依赖性解析：
+解析技术通过识别单词之间的关系来分析句子的句法结构，显示单词之间的相互依赖关系。
+- spaCy：
+为信息提取提供工具和资源的 Python 库。
 # Week 3
 
 ## Term Weighting Schemes 术语加权方案
